@@ -1,7 +1,8 @@
 import axios from 'axios'
 import useSWR from 'swr'
 import useStore from 'stores/index'
-import { useEffect } from 'react'
+import { useEffect } from 'react';
+import Marquee from './Marquee';
 
 const NewsAlertBar = (): JSX.Element => {
   const store = useStore().Main
@@ -14,7 +15,7 @@ const NewsAlertBar = (): JSX.Element => {
     <div className="news-bar">
       <div className="box">
         <div className="title">시화산단 뉴스</div>
-        <div className="content"></div>
+        <div className="content"><Marquee/></div>
       </div>
       <div className="box">
         <div className="title">AI공지</div>
