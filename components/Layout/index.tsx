@@ -33,7 +33,7 @@ const MainHeader = (): JSX.Element => {
       <div className="title">AI 융합에너지 효율화 종합 대시보드</div>
       <div className="right-box">
         <div className="logout">Log Out</div>
-        {/* <Timer /> */}
+        <Timer />
       </div>
     </div>
   )

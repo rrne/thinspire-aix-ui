@@ -3,16 +3,16 @@ import { useState } from 'react'
 import { useInterval } from 'react-use'
 
 const Timer = () => {
-  const [realTime, setRealTime] = useState(Date.now())
+  const [realTime, setRealTime] = useState(null)
 
   useInterval(() => {
-    setRealTime(Date.now())
+    setRealTime(moment())
   }, 1000)
 
   return (
     <>
       <div className="date">
-        {moment(realTime).format('YYYY/MM/DD HH:mm:ss')}
+        {realTime ? moment(realTime).format('YYYY/MM/DD HH:mm:ss') : 'Loading..'}
       </div>
     </>
   )

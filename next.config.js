@@ -9,21 +9,11 @@ module.exports = withImages(
     sassOption:{
       includePaths: [path.join(__dirname, 'styles')],
       reactStrictMode: true,
-      prependData: '@import "index.scss";'
-    },
-    lessLoaderOptions: {
     },
     images: {
       disableStaticImages: true
     },
     distDir : "build",
     trailingSlash: true,
-    exportPathMap: function() {
-        return {
-            '/': {page: '/'},
-            '/404': { page: '/404' },
-            '/app': { page: '/App' },
-        }
-    }
   })
 )
