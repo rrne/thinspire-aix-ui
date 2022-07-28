@@ -1,0 +1,95 @@
+{   
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    35.2257176,
+                    126.8583204
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "description": "Southern Ave",
+                "marker-symbol": "rail-metro",
+                "title": "아이지스"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    35.2265856,
+                    126.857933
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "description": "Southern Ave",
+                "marker-symbol": "rail-metro",
+                "title": "아이코디"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    35.2030358,
+                    126.863897
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "description": "Southern Ave",
+                "marker-symbol": "rail-metro",
+                "title": "디알텍"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    35.1989575,
+                    126.8611434
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "description": "Southern Ave",
+                "marker-symbol": "rail-metro",
+                "title": "DH글로벌"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    34.8237514,
+                    127.6584653
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "description": "Southern Ave",
+                "marker-symbol": "rail-metro",
+                "title": "재원산업"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    34.8318756,
+                    127.6492842
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "description": "Southern Ave",
+                "marker-symbol": "rail-metro",
+                "title": "에스에프시"
+            }
+        }
+    ]
+}

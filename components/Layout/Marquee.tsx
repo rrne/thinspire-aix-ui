@@ -2,10 +2,11 @@ import Marquee from "react-fast-marquee";
 import React, { useEffect, useState } from "react";
 import useStore from "stores";
 import { observer } from "mobx-react";
+import { NewsType } from "types/ApiTypes";
 
 const EventMarqee = observer(() => {
 
-    const [news, setNews] = useState([])
+    const [news, setNews] = useState<NewsType[]>([])
 
    const store = useStore().Main
 
