@@ -4,16 +4,18 @@ const path = require('path');
 const withImages = require('next-images');
 const withLess = require("next-with-less");
 
-module.exports = withImages(
+const nextConfig = withImages(
   withLess({
-    sassOption:{
-      includePaths: [path.join(__dirname, 'styles')],
-      reactStrictMode: true,
+    reactStrictMode: true,
+    sassOptions: {
+      includePaths: [path.join(__dirname, 'styles')], 
     },
     images: {
-      disableStaticImages: true
+      disableStaticImages: true,
     },
     distDir : "build",
     trailingSlash: true,
   })
 )
+
+module.exports = nextConfig

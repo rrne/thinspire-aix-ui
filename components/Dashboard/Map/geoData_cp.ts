@@ -1,15 +1,13 @@
-import { Feature, Point, FeatureCollection} from 'geojson'
-import { GeoJSONSourceRaw } from 'mapbox-gl'
+import { Feature, Point } from 'geojson'
 
 type GeoTypes = {
-    type:"geojson";
-    data:FeatureCollection
+    type:"FeatureCollection";
+    features:Feature<Point>[
+    ]
 }
 
-export const AIXData:GeoTypes = {   
-    type: "geojson",
-    data:{
-    type: 'FeatureCollection',
+export const geoData:GeoTypes = {   
+    type: "FeatureCollection",
     features: [
         {
             geometry: {
@@ -108,46 +106,4 @@ export const AIXData:GeoTypes = {
             }
         }
     ]
-   }
-}
-
-export const AIBoutureData:GeoTypes = {   
-    type: "geojson",
-    data:{
-    type: 'FeatureCollection',
-    features: [
-        {
-            geometry: {
-                type: "Point",
-                coordinates: [
-                    127.2633319,
-                    36.9769888
-                ]
-            },
-            type: "Feature",
-            properties: {
-                cluster_id:1,
-                description: "Southern Ave",
-                markerSymbol: "rail-metro",
-                title: "롯데칠성음료 안성공장"
-            }
-        },
-        {
-            geometry: {
-                type: "Point",
-                coordinates: [
-                    128.6281658,
-                    36.7908539
-                ]
-            },
-            type: "Feature",
-            properties: {
-                cluster_id:2,
-                description: "Southern Ave",
-                markerSymbol: "rail-metro",
-                title: "노벨리스코리아주식회사"
-            }
-        },
-    ]
-   }
 }

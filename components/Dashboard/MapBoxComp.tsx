@@ -1,61 +1,77 @@
 import { useState, useEffect, useRef } from 'react';
-import Map,{ Source, Layer} from 'react-map-gl';
+import mapboxgl from "mapbox-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
-import {clusterLayer, clusterCountLayer} from './Map/layers';
-import type {MapRef, GeoJSONSource} from 'react-map-gl';
-import { geoData } from "./Map/geoData";
+const marker = require('public/images/marker.png')
+import { AIXData, AIBoutureData } from "./Map/geoData";
+import useStore from 'stores';
 
 const MapBoxComp = ():JSX.Element => {
 
-  
+  useEffect(() => {
+    mapbox()
+  },[])
+
+  const store = useStore().Main
+  const myMap = useRef()
+
     const MAP_TOKEN = 'pk.eyJ1IjoiY29jby13YXBwbGFiIiwiYSI6ImNrcjJzdmxjazI2ejIydXJ6eGEzZW9sZXQifQ.VdjtFzPZbh-UwA5ite3Lkw';
 
     const MAP_STYLE = "mapbox://styles/coco-wapplab/cl63e9uym007r14nxxc660ghg"
+   
+    // const [ viewport, setViewport ] = useState({
+    //     latitude: 35.01116689472127,
+    //     longitude: 127.19614998984213,
+    //     zoom: 9,
+    //     pitch: 0
+    // } as const);
+    const AIXCenter: [number, number] = [127.19614998984213, 35.01116689472127]
+    const AICenter: [number, number] = [127.812958,36.884584]
 
+    const mapbox = () => {
+      mapboxgl.accessToken = MAP_TOKEN;
+      const map = new mapboxgl.Map({
+        container: "mapBox",
+        style: MAP_STYLE,
+        center: store.module === "AIX" ? AIXCenter : AICenter,
+        zoom: store.module === "AIX" ? 9 : 8
+      });
 
-    const [ viewport, setViewport ] = useState({
-        latitude: 35.01116689472127,
-        longitude: 127.19614998984213,
-        zoom: 9,
-        pitch: 0
-    } as const);
-
-    // copy and paste
-    const mapRef = useRef<MapRef>(null);
-
-    const onClick = event => {
-        console.log(event);
-        if(event.features.length === 0) return;
-        
-      const feature = event.features[0];
-      const clusterId = feature.properties.cluster_id;
-  
-      const mapboxSource = mapRef.current.getSource('factory') as GeoJSONSource;
-  
-      mapboxSource.getClusterExpansionZoom(clusterId, (err, zoom) => {
-        if (err) {
-          return;
-        }
-  
-        mapRef.current.easeTo({
-          center: feature.geometry.coordinates,
-          zoom,
-          duration: 500
-        });
+      map.on("load", async () => {
+        map.loadImage(
+          marker,
+          await function(error, image) {
+            if (error) throw error;
+            map.addImage("custom-marker", image);
+            // Add a GeoJSON source with 2 points
+            map.addSource("points", store.module === "AIX" ? AIXData : AIBoutureData);
+            // Add a symbol layer
+            map.addLayer({
+              id: "points",
+              type: "symbol",
+              source: "points",
+              layout: {
+                "icon-image": "custom-marker",
+                "icon-size": 0.14,
+                "icon-allow-overlap": true,
+                 "text-allow-overlap": true,
+                "text-field": ["get", "title"],
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-offset": [0, 2.25],
+                "text-anchor": "top",
+                "text-size": 14
+              },
+              paint: {
+                "text-color": "#ffffff",
+                "icon-color": "#ffffff"
+              }
+            });
+          }
+        );
       });
     };
 
     return(
-        <div className="map-box">
-        <Map initialViewState={viewport}  mapStyle={MAP_STYLE} mapboxAccessToken={MAP_TOKEN} style={{width: '100vw', height: '100vh'}} onClick={onClick} ref={mapRef} interactiveLayerIds={[clusterLayer.id]} > 
-            <Source
-                 id="factory" type="geojson" data={geoData} cluster={true} clusterMaxZoom={14}
-                 clusterRadius={50}
-            >
-            <Layer {...clusterLayer} />
-            <Layer {...clusterCountLayer} />
-            </Source>
-        </Map>
+        <div className="map-box" ref={myMap} id="mapBox" style={{width: "100vw", height:"800px"}}>
         </div>
     )
 }
