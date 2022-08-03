@@ -44,3 +44,57 @@
         }
     }
 }
+
+//Logout Modal✨
+.ant-modal-root{
+    .ant-modal-wrap{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      .ant-modal{
+        width: 15vw !important;
+        .ant-modal-content{
+          background: #071733ee;
+          border: 1px solid #09224b;
+          .ant-modal-close{
+            display: none;
+          }
+          .ant-modal-body{
+            padding:16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            .title{
+              font-size: 16px;
+            }
+            .btn-box{
+              display: flex;
+              gap: 8px;
+              align-items: center;
+              width: 100%;
+              
+              div{
+                width: 50%;
+                padding: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 16px;
+                cursor: pointer;
+                transition: 0.25s;
+              }
+              .confirm{
+                background: #135eff;
+              }
+              .cancel{
+                background: #124472;
+              }
+              div:hover{
+                opacity: 0.7;
+              }
+            }
+          }
+        }
+      }
+    }
+}

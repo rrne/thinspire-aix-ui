@@ -1,9 +1,10 @@
-import { FactoryType } from 'types/FactoryType';
+import { FactoryType, BigFactoryType } from 'types/FactoryType';
 import { runInAction, observable } from 'mobx'
 import axios from 'axios';
 
 interface FactoryStore {
     AIXFactorys: FactoryType[];
+    AIXFactorysBig: BigFactoryType[];
     AIBoutureFactorys: FactoryType[];
     getCurrentStatus: () => void;
 }
@@ -15,6 +16,7 @@ const Factory = observable<FactoryStore>({
         title: "아이지스",
         electronic: true,
         heats: true,
+        error: true,
         location: [126.8583204,
             35.2257176],
         code:"G"
@@ -24,6 +26,7 @@ const Factory = observable<FactoryStore>({
         title: "아이코디",
         electronic: true,
         heats: true,
+        error: true,
         location: [126.857933,
             35.2265856],
             code:"G"
@@ -33,6 +36,7 @@ const Factory = observable<FactoryStore>({
         title: "디알텍",
         electronic: true,
         heats: true,
+        error: true,
         location: [126.863897,
             35.2030358],
             code:"G"
@@ -42,6 +46,7 @@ const Factory = observable<FactoryStore>({
         title: "DH 글로벌",
         electronic: true,
         heats: true,
+        error: true,
         location: [126.8611434,
             35.1989575],
             code:"G"
@@ -51,6 +56,7 @@ const Factory = observable<FactoryStore>({
         title: "재원산업",
         electronic: true,
         heats: true,
+        error: true,
         location: [ 127.6584653,
             34.8237514],
             code:"Y"
@@ -60,8 +66,25 @@ const Factory = observable<FactoryStore>({
         title: "에스에프시",
         electronic: true,
         heats: true,
+        error: true,
         location: [127.6492842,
             34.8318756],
+            code:"Y"
+        }
+    ],
+    AIXFactorysBig: [
+        {
+        title: "광주",
+        error: true,
+        location: [126.8583204,
+            35.2257176],
+            code:"G"
+        },
+        {
+        title: "여수",
+        error: true,
+        location: [ 127.6584653,
+            34.8237514],
             code:"Y"
         }
     ],
@@ -71,6 +94,7 @@ const Factory = observable<FactoryStore>({
             title: "롯데칠성음료 안성공장",
             electronic: true,
             heats: true,
+            error: true,
             location: [ 127.2633319,
               36.9769888],
               code:"G"
@@ -80,6 +104,7 @@ const Factory = observable<FactoryStore>({
             title: "노벨리스코리아주식회사",
             electronic: true,
             heats: true,
+            error: true,
             location: [128.6281658,
               36.7908539],
               code:"G"
@@ -92,16 +117,28 @@ const Factory = observable<FactoryStore>({
             this.AIXFactorys[i].electronic = true
             this.AIXFactorys[i].heats = true
         }
+        for(let i =0; i < this.AIXFactorysBig.length; i++){
+            this.AIXFactorysBig[i].error = true
+            this.AIXFactorysBig[i].error = true
+        }
         
         for(let i = 0; i < res.data.length; i++){
             let idx = this.AIXFactorys.findIndex(list => list.id === res.data[i].siteid)
-            
+           
             if(res.data.class === "elec"){
                 this.AIXFactorys[idx].electronic = false
             }else{
                 this.AIXFactorys[idx].heats = false
             }
+            this.AIXFactorys[idx].error = false
+
+            if(this.AIXFactorys[idx].code === "G"){
+                this.AIXFactorysBig[0].error = false
+            }else{
+                this.AIXFactorysBig[1].error = false
+            }
         }
+       
       })
    });
   },

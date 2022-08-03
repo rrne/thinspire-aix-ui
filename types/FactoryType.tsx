@@ -3,6 +3,14 @@ export type FactoryType = {
         title: string;
         electronic: boolean;
         heats: boolean;
+        error: boolean;
+        location: [number, number];
+        code: string
+    }
+    
+export type BigFactoryType = {
+        title: string;
+        error: boolean;
         location: [number, number];
         code: string
     }

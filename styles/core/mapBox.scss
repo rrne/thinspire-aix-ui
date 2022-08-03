@@ -1,17 +1,56 @@
-.mapboxgl-map{
-    .mapboxgl-marker{
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        gap: 8px;
+.map-box{
+    .mapboxgl-map{
+        .mapboxgl-marker{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 8px;
 
-        .title{
-            color: white;
-            font-size: 12px;
-            background: rgba(38, 53, 95, 0.692);
-            padding: 2px 6px;
-            border-radius: 10px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            .title{
+                color: white;
+                font-size: 12px;
+                background: rgba(38, 53, 95, 0.692);
+                padding: 2px 6px;
+                border-radius: 10px;
+                box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            }
+        }
+    }
+    .control-panel{
+        position: absolute;
+        top:20px;
+        left: calc(20% + 40px);
+        background: #03152bd7;
+        border: 1px solid #2a4364;
+        box-shadow: 0 0 4px #05418575;
+        border-radius: 12px;
+        padding: 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        .control{
+            cursor: pointer;
+            padding: 2px 8px;
+            background: #1a44777c;
+            border-radius: 6px;
+            transition: 0.25s;
+            text-align: center;
+             display: flex;
+                gap: 6px;
+                align-items: center;
+                justify-content: center;
+                span{
+                    font-size: 10px;
+                }
+            &.total{
+                background: #1687aa7c;
+               
+            }
+        }
+
+        .control:hover{
+            background: #167fffbd;
         }
     }
 }
