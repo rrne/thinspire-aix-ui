@@ -1,5 +1,6 @@
-import Main from './main'
+import Main from './main';
+import Factory from './factory'
 
-const useStore = () => ({ Main })
+const useStore = () => ({ Main, Factory })
 
 export default useStore

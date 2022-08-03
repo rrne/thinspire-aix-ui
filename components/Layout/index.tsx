@@ -17,11 +17,11 @@ export const DefaultLayout = ({
   return (
     <div className="app">
       <Head title={title} />
-      <div>
+      <>
         {mainpage ? <MainHeader /> : <SubHeader />}
         <NewsAlertBar />
         {children}
-      </div>
+      </>
     </div>
   )
 }

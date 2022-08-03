@@ -3,15 +3,15 @@ import useSWR from 'swr'
 import useStore from 'stores/index'
 import { useEffect } from 'react';
 import Marquee from './Marquee';
+import AIMarquee from './AIMarquee';
 import { faClipboardList } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NewsAlertBar = (): JSX.Element => {
   const store = useStore().Main
-
-  //   const { data, error } = useSWR('/api/data', store.getNewsAPI)
   useEffect(() => {
     store.getNewsAPI()
+    store.getAIAlarm()
   }, [])
   return (
     <div className="news-bar">
@@ -25,7 +25,7 @@ const NewsAlertBar = (): JSX.Element => {
         <FontAwesomeIcon icon={faClipboardList}/>
         </div>
         </div>
-        <div className="content"></div>
+        <div className="content"><AIMarquee/></div>
       </div>
     </div>
   )

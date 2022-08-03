@@ -1,14 +1,51 @@
 import { useState, useEffect, useRef } from 'react';
 import mapboxgl from "mapbox-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
-const marker = require('public/images/marker.png')
-import { AIXData, AIBoutureData } from "./Map/geoData";
+import marker from 'public/images/marker.png'
+import { AIBoutureFactorys, AIXFactorys, GeoTypes } from "./Map/geoData";
 import useStore from 'stores';
 
 const MapBoxComp = ():JSX.Element => {
 
+  const [mapData, setMapData] = useState<GeoTypes>()
+
   useEffect(() => {
-    mapbox()
+    const data =  store.module === "AIX" ? AIXFactorys : AIBoutureFactorys;
+    
+    const dataArr:GeoTypes = {
+      type: "geojson",
+      data:{
+        type: 'FeatureCollection',
+        features: [
+          {
+            geometry: {
+              type: "Point",
+              coordinates: []
+              },
+            type: "Feature",
+            properties: {
+                cluster_id: 1,
+                title: "",
+                code:""
+            }
+          }
+        ]
+      }
+    }
+
+    for(let i = 0; i < data.length; i++){
+      let cpFeatures = {...dataArr.data.features[0]}
+      cpFeatures.geometry.coordinates = data[i].location;
+      cpFeatures.properties.title = data[i].title
+      cpFeatures.properties.code = data[i].code
+      dataArr.data.features.push(cpFeatures)
+    }
+    console.log(dataArr);
+    setMapData(dataArr)
+  },[AIXFactorys])
+
+  useEffect(() => {
+    mapbox();
   },[])
 
   const store = useStore().Main
@@ -17,13 +54,7 @@ const MapBoxComp = ():JSX.Element => {
     const MAP_TOKEN = 'pk.eyJ1IjoiY29jby13YXBwbGFiIiwiYSI6ImNrcjJzdmxjazI2ejIydXJ6eGEzZW9sZXQifQ.VdjtFzPZbh-UwA5ite3Lkw';
 
     const MAP_STYLE = "mapbox://styles/coco-wapplab/cl63e9uym007r14nxxc660ghg"
-   
-    // const [ viewport, setViewport ] = useState({
-    //     latitude: 35.01116689472127,
-    //     longitude: 127.19614998984213,
-    //     zoom: 9,
-    //     pitch: 0
-    // } as const);
+
     const AIXCenter: [number, number] = [127.19614998984213, 35.01116689472127]
     const AICenter: [number, number] = [127.812958,36.884584]
 
@@ -40,10 +71,14 @@ const MapBoxComp = ():JSX.Element => {
         map.loadImage(
           marker,
           await function(error, image) {
-            if (error) throw error;
+            if (error){
+              console.log(error);
+              throw error;
+              
+            }
             map.addImage("custom-marker", image);
             // Add a GeoJSON source with 2 points
-            map.addSource("points", store.module === "AIX" ? AIXData : AIBoutureData);
+            map.addSource("points", mapData);
             // Add a symbol layer
             map.addLayer({
               id: "points",

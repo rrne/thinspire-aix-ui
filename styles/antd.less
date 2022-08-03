@@ -1,0 +1,46 @@
+@import '~antd/dist/antd.dark.less'; 
+
+@primary-color: #138dff;
+
+//AINews ToolTip✨
+.@{popover-prefix-cls} {
+    &-content {
+      position: relative;
+    }
+    &-inner{
+      background: #081730dc;
+      border: 1px solid #0a3b8a;
+      border-radius: 12px;
+      &-content{
+        padding: 8px 10px;
+        .listTooltip{
+            font-size: 13px;
+           .box{
+            display: flex;
+            gap: 10px;
+            .label{
+                color: #529be0;
+                position: relative;
+            }
+            .label::after{
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: -5px;
+                width: 1px;
+                height: 60%;
+                background: rgba(19, 141, 255, 0.397);
+                transform: translateY(-50%);
+            }
+           }
+        }
+      }
+    }
+    &-arrow{
+        &-content {
+            background: #081730dc;
+            --antd-arrow-background-color: transparent;
+            border: 1px solid #0a3b8a;
+        }
+    }
+}

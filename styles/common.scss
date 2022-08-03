@@ -85,14 +85,13 @@
                 align-items: center;
                 gap: 8px;
                 font-size: 16px;
-                font-weight: 500;
                 .icon{
                     color: #9cc3da;
                     cursor: pointer;
                     transition: 0.25s;
                 }
                 .icon:hover{
-                    color: rgb(208, 244, 255);
+                    color: rgb(255, 255, 255);
                 }
             }
             .content{
