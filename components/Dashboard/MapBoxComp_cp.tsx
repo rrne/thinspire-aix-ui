@@ -6,8 +6,9 @@ import { GeoTypes } from "./Map/geoData";
 import useStore from 'stores';
 import Image from 'next/image';
 import ControlPanel from './Map/control-panel';
+import { observer } from 'mobx-react-lite';
 
-const MapBoxComp = ():JSX.Element => {
+const MapBoxComp = observer(():JSX.Element => {
   const store = useStore().Main
   const factory = useStore().Factory
 
@@ -18,6 +19,8 @@ const MapBoxComp = ():JSX.Element => {
   }})
 
   const [storeData, setStoreData] = useState(store.module === "AIX" ? factory.AIXFactorysBig : factory.AIBoutureFactorys)
+
+  const [select, setSelect] = useState('total')
 
   useEffect(() => {
     const dataArr:GeoTypes = {
@@ -43,7 +46,8 @@ const MapBoxComp = ():JSX.Element => {
       })
     }
     setMapData(dataArr)
-  },[storeData])
+    
+  },[factory.apiCallCount, storeData])
 
     const MAP_TOKEN = 'pk.eyJ1IjoiY29jby13YXBwbGFiIiwiYSI6ImNrcjJzdmxjazI2ejIydXJ6eGEzZW9sZXQifQ.VdjtFzPZbh-UwA5ite3Lkw';
 
@@ -60,12 +64,12 @@ const MapBoxComp = ():JSX.Element => {
     // copy and paste
     const mapRef = useRef<MapRef>(null);
 
-    const onSelectCity = useCallback(({longitude, latitude, zoom}) => {
+    const onSelectCity = useCallback(({longitude, latitude, zoom, title}) => {
       mapRef.current?.flyTo({center: [longitude, latitude], duration: 3000, zoom: zoom});
+      setSelect(title)
     }, []);
 
     const controlWheelMap = (event) => {
-      console.log(event.viewState.zoom);
       
       if(event.viewState.zoom > 11){
         setStoreData(store.module === "AIX" ? factory.AIXFactorys : factory.AIBoutureFactorys)
@@ -90,10 +94,10 @@ const MapBoxComp = ():JSX.Element => {
               )
             })}
             </Source>
-            <ControlPanel onSelectCity={onSelectCity} />
+            <ControlPanel onSelectCity={onSelectCity} select={select} />
         </Map>
         </div>
     )
-}
+})
 
 export default MapBoxComp

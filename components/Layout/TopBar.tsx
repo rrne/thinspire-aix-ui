@@ -1,6 +1,8 @@
 import Timer from './Timer';
 import { Modal } from 'antd';
 import { useState, useCallback  } from 'react';
+import { faFireFlameCurved } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const MainHeader = (): JSX.Element => {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -15,7 +17,9 @@ export const MainHeader = (): JSX.Element => {
     return (
       <div className="top-header">
         <img src={require('public/images/logo.png')} className="logo" />
-        <div className="title">AI 융합에너지 효율화 종합 대시보드</div>
+        <div className="title">
+        <div className="icon"><FontAwesomeIcon icon={faFireFlameCurved}/></div>
+          AI 융합에너지 효율화 종합 대시보드</div>
         <div className="right-box">
           <div className="logout" onClick={showModal}>Log Out</div>
           <Timer />

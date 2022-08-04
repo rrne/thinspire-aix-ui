@@ -19,7 +19,7 @@
     .control-panel{
         position: absolute;
         top:20px;
-        left: calc(20% + 40px);
+        left: calc(20% + 30px);
         background: #03152bd7;
         border: 1px solid #2a4364;
         box-shadow: 0 0 4px #05418575;
@@ -31,7 +31,7 @@
 
         .control{
             cursor: pointer;
-            padding: 2px 8px;
+            padding: 2px 6px;
             background: #1a44777c;
             border-radius: 6px;
             transition: 0.25s;
@@ -40,17 +40,22 @@
                 gap: 6px;
                 align-items: center;
                 justify-content: center;
+                border: 1px solid rgba(56, 101, 160, 0);
+                
+                &.select{
+                    border: 1px solid #1973db;
+                }
                 span{
                     font-size: 10px;
                 }
             &.total{
-                background: #1687aa7c;
+                background: #2c71cc7c;
                
             }
         }
 
         .control:hover{
-            background: #167fffbd;
+            background: #106ddfd5;
         }
     }
 }

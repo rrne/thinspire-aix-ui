@@ -53,9 +53,11 @@
       overflow: hidden;
       .ant-modal{
         width: 15vw !important;
+        top: 30%;
         .ant-modal-content{
-          background: #071733ee;
-          border: 1px solid #09224b;
+          border-radius: 12px;
+          background: rgba(5, 25, 59, 0.847);
+          border: 1px solid #0b3579;
           .ant-modal-close{
             display: none;
           }
@@ -64,9 +66,7 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            .title{
-              font-size: 16px;
-            }
+
             .btn-box{
               display: flex;
               gap: 8px;
@@ -81,6 +81,7 @@
                 justify-content: center;
                 border-radius: 16px;
                 cursor: pointer;
+                font-size: 12px;
                 transition: 0.25s;
               }
               .confirm{

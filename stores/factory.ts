@@ -6,6 +6,7 @@ interface FactoryStore {
     AIXFactorys: FactoryType[];
     AIXFactorysBig: BigFactoryType[];
     AIBoutureFactorys: FactoryType[];
+    apiCallCount:number;
     getCurrentStatus: () => void;
 }
 
@@ -110,9 +111,11 @@ const Factory = observable<FactoryStore>({
               code:"G"
           },
     ],
+    apiCallCount:0,
   async getCurrentStatus() {
     await axios.post("http://175.123.142.155:28887/main/current_status",{ siteid: "ALL" }).then((res) => {
       runInAction(() => {
+        this.apiCallCount++
         for(let i =0; i < this.AIXFactorys.length; i++){
             this.AIXFactorys[i].electronic = true
             this.AIXFactorys[i].heats = true

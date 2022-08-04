@@ -10,9 +10,9 @@ function ControlPanel(props) {
 
   return (
     <div className="control-panel">
-        <div className="total control"  onClick={() => props.onSelectCity({longitude:127.19614998984213, latitude:35.01116689472127, zoom:9})}><span><FontAwesomeIcon icon={faUpRightAndDownLeftFromCenter}/></span>전체보기</div>
+        <div className={props.select === "total" ? "total control select" : "total control"}  onClick={() => props.onSelectCity({longitude:127.19614998984213, latitude:35.01116689472127, zoom:9, title:"total"})}><span><FontAwesomeIcon icon={faUpRightAndDownLeftFromCenter}/></span>전체보기</div>
       {storeData.map((list, i) => (
-        <div key={i} className="control" onClick={() => props.onSelectCity({longitude:list.location[0], latitude:list.location[1], zoom:15})}>
+        <div key={i} className={props.select === list.title ? "control select" : "control"}  onClick={() => props.onSelectCity({longitude:list.location[0], latitude:list.location[1], zoom:15, title:list.title})}>
           <span><FontAwesomeIcon icon={faIndustry}/></span>{list.title}
         </div>
       ))}
