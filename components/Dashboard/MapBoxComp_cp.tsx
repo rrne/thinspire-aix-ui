@@ -3,14 +3,10 @@ import Map,{ Source, Marker} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import type {MapRef, GeoJSONSource} from 'react-map-gl';
 import { GeoTypes } from "./Map/geoData";
-import useStore from 'stores';
 import Image from 'next/image';
-import ControlPanel from './Map/control-panel';
 import { observer } from 'mobx-react-lite';
 
-const MapBoxComp = observer(():JSX.Element => {
-  const store = useStore().Main
-  const factory = useStore().Factory
+const MapBoxComp = observer(({func, store, factory, flyto} : {func, store, factory, flyto}):JSX.Element => {
 
   const [mapData, setMapData] = useState<GeoTypes>({
     data:{
@@ -21,6 +17,15 @@ const MapBoxComp = observer(():JSX.Element => {
   const [storeData, setStoreData] = useState(store.module === "AIX" ? factory.AIXFactorysBig : factory.AIBoutureFactorys)
 
   const [select, setSelect] = useState('total')
+
+  useEffect(() => {
+    if(!flyto) return;
+    if(flyto.title === "total"){
+      callFlyToFactory({longitude:flyto.location[0], latitude:flyto.location[1], zoom: 9})
+      return;
+    }
+    callFlyToFactory({longitude:flyto.location[0], latitude:flyto.location[1], zoom: 15})
+  },[flyto])
 
   useEffect(() => {
     const dataArr:GeoTypes = {
@@ -64,9 +69,14 @@ const MapBoxComp = observer(():JSX.Element => {
     // copy and paste
     const mapRef = useRef<MapRef>(null);
 
-    const onSelectCity = useCallback(({longitude, latitude, zoom, title}) => {
+    type flytoParams = {
+      center:[number, number];
+      duration:number;
+      zoom:number
+    }
+    const callFlyToFactory = useCallback(({longitude, latitude, zoom}) => {
       mapRef.current?.flyTo({center: [longitude, latitude], duration: 3000, zoom: zoom});
-      setSelect(title)
+      // setSelect(title)
     }, []);
 
     const controlWheelMap = (event) => {
@@ -94,7 +104,7 @@ const MapBoxComp = observer(():JSX.Element => {
               )
             })}
             </Source>
-            <ControlPanel onSelectCity={onSelectCity} select={select} />
+            {/* <ControlPanel onSelectCity={callFlyToFactory} select={select} /> */}
         </Map>
         </div>
     )
