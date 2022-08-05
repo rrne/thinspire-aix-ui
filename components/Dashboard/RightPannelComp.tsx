@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import { FactoryType } from 'types/FactoryType';
 import Image from "next/image";
-import useStore from 'stores';
 import { faFaceSmile, faFaceSadTear, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { observer } from 'mobx-react';

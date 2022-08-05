@@ -5,11 +5,9 @@ import { Layout } from 'components'
 
 const NotFound: NextPage = () => {
   return (
-    <Layout title='404'>
       <section>
         <h1>404</h1>
       </section>
-    </Layout>
   )
 }
 

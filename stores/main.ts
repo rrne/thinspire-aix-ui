@@ -3,6 +3,7 @@ import {  runInAction, observable } from 'mobx'
 import axios from 'axios';
 interface MainStore {
   module: string;
+  subpage: string;
   newsData: NewsType[];
   dailyUsage: DailyUsage;
   monthlyUsage: MonthlyUsage[];
@@ -15,10 +16,12 @@ interface MainStore {
   getMonthlySteamStatus: () => void;
   getSteamCount: () => void;
   getAIAlarm: () => void;
+  changeSubpage: (value:string) => void;
 }
 
 const Main = observable<MainStore>({
   module: "AIX",
+  subpage:"elec",
   newsData: [],
   dailyUsage: null,
   monthlyUsage: [],
@@ -69,6 +72,9 @@ const Main = observable<MainStore>({
       })
    });
   },
+  changeSubpage(value:string){
+    this.subpage = value
+  }
 }) 
 
 export default Main
