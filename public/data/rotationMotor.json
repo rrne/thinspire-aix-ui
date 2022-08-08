@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Air Comp 01",
+    "type": "aircomp",
+    "value": {
+      "elec": 1234,
+      "temp": 14.5,
+      "compressure": 23.9
+    },
+    "daysTrend": [],
+    "monthTrend": []
+  },
+  {
+    "title": "Blower 02",
+    "type": "blower",
+    "value": {
+      "elec": 3427687,
+      "temp": 15.1,
+      "compressure": 28.5
+    },
+    "daysTrend": [],
+    "monthTrend": []
+  },
+  {
+    "title": "Pump 03",
+    "type": "pump",
+    "value": {
+      "elec": 1432870,
+      "temp": 25.4,
+      "compressure": 35.2
+    },
+    "daysTrend": [],
+    "monthTrend": []
+  }
+]

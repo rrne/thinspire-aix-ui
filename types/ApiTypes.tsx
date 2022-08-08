@@ -71,3 +71,15 @@ export type CsvData = {
   act_kwh: number
   react_kwh: number
 }
+
+export type RotationMotor = {
+  title: string
+  type: string
+  value: {
+    elec: number
+    temp: number
+    compressure: number
+  }
+  daysTrend: []
+  monthTrend: []
+}
