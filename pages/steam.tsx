@@ -6,9 +6,15 @@ import { useEffect } from 'react'
 
 const SteamPage: NextPage = () => {
   const store = useStore().Main
+  const steam = useStore().Steam
 
   useEffect(() => {
     store.changeSubpage('steam')
+    steam.getSteamTrapDignosisBGdata()
+    const factoryNum = sessionStorage.getItem('factory')
+    steam.getSteamTrapStatusAPI(factoryNum)
+    steam.getSteamTrapCountAPI(factoryNum)
+    steam.getSteamTrapDignosisAPI(factoryNum)
   }, [])
   return (
     <Layout title="steam" mainpage={false}>

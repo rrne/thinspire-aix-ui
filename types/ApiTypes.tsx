@@ -97,3 +97,26 @@ export type RotationMotor = {
   daysTrend: []
   monthTrend: []
 }
+
+//SteamPage API Types
+export type SteamTrapStatus = {
+  normal: number
+  anomaly: number
+  diagnosis: number
+}
+export type SteamTrapCount = {
+  trapType: string
+  count: number
+}
+export type SteamTrapDignosis = {
+  site_name: string
+  time: string
+  in_temp: number
+  out_temp: number
+  point_name: string
+  anomaly_labels: boolean
+}
+export type SteamTrapDignosisBG = {
+  intemp: number
+  outtemp: number
+}
