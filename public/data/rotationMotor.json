@@ -31,5 +31,16 @@
     },
     "daysTrend": [],
     "monthTrend": []
+  },
+  {
+    "title": "Air Comp 04",
+    "type": "aircomp",
+    "value": {
+      "elec": 1234,
+      "temp": 14.5,
+      "compressure": 23.9
+    },
+    "daysTrend": [],
+    "monthTrend": []
   }
 ]

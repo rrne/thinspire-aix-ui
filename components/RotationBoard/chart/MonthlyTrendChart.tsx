@@ -2,6 +2,7 @@ import ReactECharts from 'echarts-for-react'
 import { observer } from 'mobx-react-lite'
 import { useState, useEffect } from 'react'
 import useStore from 'stores'
+import moment from 'moment'
 
 const MonthlyPredictChart = observer(() => {
   const store = useStore().Elec
@@ -15,7 +16,7 @@ const MonthlyPredictChart = observer(() => {
     const limit = []
 
     for (let i = 0; i < data.length; i++) {
-      time.push(data[i].time)
+      time.push(moment(data[i].time * 1000).format('MM/DD'))
       real_value.push(data[i].real_value)
       predict_value.push(data[i].predict_value)
       sum_value.push(data[i].sum_value)
@@ -73,10 +74,10 @@ const MonthlyPredictChart = observer(() => {
         orient: 'horizontal',
       },
       grid: {
-        left: '0',
+        left: '2%',
         right: '2%',
-        bottom: '5%',
-        top: '15%',
+        bottom: '0%',
+        top: '25%',
         containLabel: true,
       },
       dataZoom: [

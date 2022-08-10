@@ -35,6 +35,7 @@ export type AINews = {
   api_contents: string
 }
 
+//ElecPage API Types
 export type UseageType = [
   {
     now_kwh: string
@@ -72,6 +73,19 @@ export type CsvData = {
   react_kwh: number
 }
 
+export type PPgraphData = {
+  seg_count: number
+  data: PPGraph[]
+}
+
+type PPGraph = {
+  dev_time: number
+  kwh: number
+  cost: number
+  holiday: number
+}
+
+//RotationPage API Types
 export type RotationMotor = {
   title: string
   type: string

@@ -2,6 +2,7 @@ import ReactECharts from 'echarts-for-react'
 import { observer } from 'mobx-react-lite'
 import { useState, useEffect } from 'react'
 import useStore from 'stores'
+import moment from 'moment'
 
 const DailyPredictChart = observer(() => {
   const store = useStore().Elec
@@ -15,7 +16,7 @@ const DailyPredictChart = observer(() => {
     const limit = []
 
     for (let i = 0; i < data.length; i++) {
-      time.push(data[i].time)
+      time.push(moment(data[i].time * 1000).format('hh'))
       real_value.push(data[i].real_value)
       predict_value.push(data[i].predict_value)
       limit.push(data[i].limit)
@@ -65,8 +66,8 @@ const DailyPredictChart = observer(() => {
       grid: {
         left: '2%',
         right: '2%',
-        bottom: '5%',
-        top: '15%',
+        bottom: '2%',
+        top: '25%',
         containLabel: true,
       },
       legend: {
@@ -173,15 +174,10 @@ const DailyPredictChart = observer(() => {
           data: predict_value,
           markLine: {
             lineStyle: {
-              type: 'solid',
-              width: 1,
+              type: 'none',
+              width: 0,
               color: '#69DADB',
             },
-            data: [
-              {
-                xAxis: today,
-              },
-            ],
           },
         },
         {

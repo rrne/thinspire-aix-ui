@@ -29,7 +29,7 @@ const FourUsageComp = observer((): JSX.Element => {
     : null
 
   return (
-    <div className="four-usagecomp">
+    <>
       {usage?.map((list, i) => {
         return (
           <div className="usage" key={i}>
@@ -41,7 +41,7 @@ const FourUsageComp = observer((): JSX.Element => {
           </div>
         )
       })}
-    </div>
+    </>
   )
 })
 

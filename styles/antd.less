@@ -1,101 +1,192 @@
-@import '~antd/dist/antd.dark.less'; 
+@import '~antd/dist/antd.dark.less';
 
 @primary-color: #138dff;
 
 //AINews ToolTip✨
 .@{popover-prefix-cls} {
+  &-content {
+    position: relative;
+  }
+  &-inner {
+    background: #081730dc;
+    border: 1px solid #0a3b8a;
+    border-radius: 12px;
     &-content {
-      position: relative;
-    }
-    &-inner{
-      background: #081730dc;
-      border: 1px solid #0a3b8a;
-      border-radius: 12px;
-      &-content{
-        padding: 8px 10px;
-        .listTooltip{
-            font-size: 13px;
-           .box{
-            display: flex;
-            gap: 10px;
-            .label{
-                color: #529be0;
-                position: relative;
-            }
-            .label::after{
-                content: "";
-                position: absolute;
-                top: 50%;
-                right: -5px;
-                width: 1px;
-                height: 60%;
-                background: rgba(19, 141, 255, 0.397);
-                transform: translateY(-50%);
-            }
-           }
+      padding: 8px 10px;
+      .listTooltip {
+        font-size: 13px;
+        .box {
+          display: flex;
+          gap: 10px;
+          .label {
+            color: #529be0;
+            position: relative;
+          }
+          .label::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -5px;
+            width: 1px;
+            height: 60%;
+            background: rgba(19, 141, 255, 0.397);
+            transform: translateY(-50%);
+          }
         }
       }
     }
-    &-arrow{
-        &-content {
-            background: #081730dc;
-            --antd-arrow-background-color: transparent;
-            border: 1px solid #0a3b8a;
-        }
+  }
+  &-arrow {
+    &-content {
+      background: #081730dc;
+      --antd-arrow-background-color: transparent;
+      border: 1px solid #0a3b8a;
     }
+  }
 }
 
 //Logout Modal✨
-.ant-modal-root{
-    .ant-modal-wrap{
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      .ant-modal{
-        width: 15vw !important;
-        top: 30%;
-        .ant-modal-content{
-          border-radius: 12px;
-          background: rgba(5, 25, 59, 0.847);
-          border: 1px solid #0b3579;
-          .ant-modal-close{
-            display: none;
-          }
-          .ant-modal-body{
-            padding:16px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+.ant-modal-root {
+  .ant-modal-wrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .ant-modal {
+      width: 15vw !important;
+      top: 30%;
+      .ant-modal-content {
+        border-radius: 12px;
+        background: rgba(5, 25, 59, 0.847);
+        border: 1px solid #0b3579;
+        .ant-modal-close {
+          display: none;
+        }
+        .ant-modal-body {
+          padding: 16px 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
 
-            .btn-box{
+          .btn-box {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            width: 100%;
+
+            div {
+              width: 50%;
+              padding: 4px;
               display: flex;
-              gap: 8px;
               align-items: center;
-              width: 100%;
-              
-              div{
-                width: 50%;
-                padding: 4px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 16px;
-                cursor: pointer;
-                font-size: 12px;
-                transition: 0.25s;
-              }
-              .confirm{
-                background: #135eff;
-              }
-              .cancel{
-                background: #124472;
-              }
-              div:hover{
-                opacity: 0.7;
-              }
+              justify-content: center;
+              border-radius: 16px;
+              cursor: pointer;
+              font-size: 12px;
+              transition: 0.25s;
+            }
+            .confirm {
+              background: #135eff;
+            }
+            .cancel {
+              background: #124472;
+            }
+            div:hover {
+              opacity: 0.7;
             }
           }
         }
       }
     }
+  }
+}
+
+//chart Modal✨
+.ant-modal-root {
+  .ant-modal-wrap {
+    &.chartModal {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      .ant-modal {
+        width: 60vw !important;
+        top: 20%;
+        .ant-modal-content {
+          border-radius: 8px;
+          background: #0e192c;
+          border: 1px solid #1a3057;
+          .ant-modal-close {
+            display: block;
+          }
+          .ant-modal-body {
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            .top-box {
+              display: flex;
+              width: 100%;
+              align-items: center;
+              gap: 40px;
+
+              .title {
+                color: white;
+                font-size: 24px;
+                font-weight: 600;
+              }
+              .ant-select-arrow {
+                color: white;
+              }
+              .selectTime-box {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                color: rgb(185, 199, 211);
+
+                .ant-select-selector {
+                  background: rgba(0, 0, 0, 0.2);
+                  border: 1px solid #234b8f;
+                  border-radius: 20px;
+                  .ant-select-selection-item {
+                    color: rgba(255, 255, 255, 0.856);
+                  }
+                }
+              }
+            }
+
+            .chart-conent {
+              width: 100%;
+              height: 400px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+
+            .downloadBtn {
+              margin-left: auto;
+              width: 140px;
+              color: white;
+              background: #274881;
+              padding: 4px;
+              font-size: 14px;
+              font-weight: 400;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 20px;
+              margin-top: 8px;
+              transition: 0.3s;
+              cursor: pointer;
+            }
+            .downloadBtn:hover {
+              background: #1543af;
+            }
+
+            .hidden {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
 }

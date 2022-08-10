@@ -4,8 +4,26 @@ import TitleBox from 'components/Layout/TitleBox'
 import MonthlyPredictChart from './chart/MonthlyPredictChart'
 import DailyPredictChart from './chart/DailyPredictChart'
 import DignosticPlanChart from './chart/DignosticPlanChart'
+import { Modal } from 'antd'
+import ModalComp from './ModalComp'
+import { useState } from 'react'
+import useStore from 'stores'
 
 const ElecBoard = (): JSX.Element => {
+  const store = useStore().Elec
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
+
+  const showModal = () => {
+    const id = sessionStorage.getItem('factory')
+    store.getPPGraphDataAPI(id, 'today')
+    setIsModalVisible(true)
+  }
+
   return (
     <div className="elec-page">
       <img
@@ -14,7 +32,9 @@ const ElecBoard = (): JSX.Element => {
         className="background"
       />
       <div className="data-box">
-        <FourUsageComp />
+        <div className="four-usagecomp" onClick={showModal}>
+          <FourUsageComp />
+        </div>
         <DevicePosition />
       </div>
       <div className="data-box">
@@ -31,7 +51,7 @@ const ElecBoard = (): JSX.Element => {
             </div>
           </div>
           <div className="chart-box">
-            <TitleBox title="한달 전력 사용량 예측 그래프" />
+            <TitleBox title="하루 전력 사용량 예측 그래프" />
             <img
               src={require('public/images/elec_chart.png')}
               alt=""
@@ -54,6 +74,14 @@ const ElecBoard = (): JSX.Element => {
           </div>
         </div>
       </div>
+      <Modal
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+        wrapClassName="chartModal"
+      >
+        <ModalComp />
+      </Modal>
     </div>
   )
 }

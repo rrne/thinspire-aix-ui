@@ -4,6 +4,7 @@ import {
   MonthlyPredict,
   DignosticPlan,
   CsvData,
+  PPgraphData,
 } from 'types/ApiTypes'
 import { runInAction, observable } from 'mobx'
 import axios from 'axios'
@@ -14,10 +15,14 @@ interface ElecStore {
   monthlyPredict: MonthlyPredict[]
   dignosticPlan: DignosticPlan[]
   csvData: CsvData[]
+  ppgraphData: PPgraphData
+  downloadPPTrendData: string[]
   getUsageChargeAPI: (id: string) => void
   getDailyPredictAPI: (id: string) => void
   getMonthlyPredictAPI: (id: string) => void
   getDignosticPlanAPI: (id: string) => void
+  getPPGraphDataAPI: (id: string, period: string) => void
+  downloadPPGraphDataAPI: (id: string, period: string) => void
   getCsvData: () => void
 }
 
@@ -27,6 +32,8 @@ const Elec = observable<ElecStore>({
   monthlyPredict: [],
   dignosticPlan: [],
   csvData: [],
+  ppgraphData: null,
+  downloadPPTrendData: [],
   async getUsageChargeAPI(id) {
     await axios
       .post('http://175.123.142.155:28887/sub/elec/usage-charge', {
@@ -46,7 +53,6 @@ const Elec = observable<ElecStore>({
       .then((res) => {
         runInAction(() => {
           this.dailyPredict = res.data
-          console.log(res.data)
         })
       })
   },
@@ -58,7 +64,6 @@ const Elec = observable<ElecStore>({
       .then((res) => {
         runInAction(() => {
           this.monthlyPredict = res.data
-          console.log(res.data)
         })
       })
   },
@@ -70,7 +75,6 @@ const Elec = observable<ElecStore>({
       .then((res) => {
         runInAction(() => {
           this.dignosticPlan = res.data
-          console.log(res.data)
         })
       })
   },
@@ -80,6 +84,30 @@ const Elec = observable<ElecStore>({
         this.csvData = res.data
       })
     })
+  },
+  async getPPGraphDataAPI(id, period) {
+    await axios
+      .post('http://175.123.142.155:28887/sub/pp_trend_graph', {
+        siteid: id,
+        search_period: period,
+      })
+      .then((res) => {
+        runInAction(() => {
+          this.ppgraphData = res.data
+        })
+      })
+  },
+  async downloadPPGraphDataAPI(id, period) {
+    await axios
+      .post('http://175.123.142.155:28887/sub/pp_trend_csv', {
+        siteid: id,
+        search_period: period,
+      })
+      .then((res) => {
+        runInAction(() => {
+          this.downloadPPTrendData = res.data
+        })
+      })
   },
 })
 
