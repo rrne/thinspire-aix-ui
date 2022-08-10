@@ -2993,6 +2993,11 @@ react-map-gl@^7.0.18:
   dependencies:
     "@types/mapbox-gl" "^2.6.0"
 
+react-unity-webgl@^9.0.4:
+  version "9.0.4"
+  resolved "https://registry.yarnpkg.com/react-unity-webgl/-/react-unity-webgl-9.0.4.tgz#330aaba0962f2d8574e4bfb5785a4739ebd75b97"
+  integrity sha512-3Sy0t1eSlSWGQ56asyLoMvjGhfdUAjpWzjwR8TSW/+EoDJdIN08/el2lVzTdTNlgLrMt31YWYRxcyBb8oEgYHw==
+
 react-universal-interface@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/react-universal-interface/-/react-universal-interface-0.6.2.tgz#5e8d438a01729a4dbbcbeeceb0b86be146fe2b3b"

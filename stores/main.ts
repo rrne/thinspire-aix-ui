@@ -27,7 +27,7 @@ interface MainStore {
 }
 
 const Main = observable<MainStore>({
-  module: 'AIX',
+  module: 'AI',
   subpage: 'elec',
   newsData: [],
   dailyUsage: null,

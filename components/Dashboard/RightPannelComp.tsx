@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FactoryType } from 'types/FactoryType'
+import { AIXFactoryType } from 'types/FactoryType'
 import Image from 'next/image'
 import {
   faFaceSmile,
@@ -36,7 +36,7 @@ const RightPannelComp = observer(
     type PannelData = {
       label: string
       className: string
-      data: FactoryType[]
+      data: AIXFactoryType[]
     }
 
     const pannel: PannelData[] = [
@@ -56,6 +56,9 @@ const RightPannelComp = observer(
       if (page === 'elec') {
         router.push('elec')
         sessionStorage.setItem('factory', value)
+      } else if (page === 'steam') {
+        router.push('steam')
+        sessionStorage.setItem('factory', value)
       } else {
         router.push('rotation')
         sessionStorage.setItem('factory', value)
@@ -63,7 +66,9 @@ const RightPannelComp = observer(
     }
 
     return (
-      <div className="right-pannel">
+      <div
+        className={store.module === 'AIX' ? 'right-pannel' : 'AIright-pannel'}
+      >
         <div className="right-box">
           <div className="title-box">
             <div className="title">
@@ -76,26 +81,109 @@ const RightPannelComp = observer(
               />
               <div>에너지 효율 현황</div>
             </div>
+            {store.module === 'AIX' ? (
+              ''
+            ) : (
+              <div className="factoryLabel" onClick={funcTotal}>
+                <FontAwesomeIcon icon={faHouse} />
+                전체보기
+              </div>
+            )}
           </div>
           <div className="content">
-            {pannel.map((list, i) => {
-              return (
-                <div className={list.className + ' factory-box'} key={i}>
-                  <div className="factoryLabel" onClick={funcTotal}>
-                    <div className="icon">
-                      <FontAwesomeIcon icon={faHouse} />
+            {store.module === 'AIX'
+              ? pannel.map((list, i) => {
+                  return (
+                    <div className={list.className + ' factory-box'} key={i}>
+                      <div className="factoryLabel" onClick={funcTotal}>
+                        <div className="icon">
+                          <FontAwesomeIcon icon={faHouse} />
+                        </div>
+                        {list.label}
+                      </div>
+                      {list.data?.map((factory, k) => {
+                        return (
+                          <div
+                            className={
+                              factory.electronic && factory.heats
+                                ? 'factory'
+                                : 'factory error'
+                            }
+                            key={k}
+                          >
+                            <div
+                              className="img-box"
+                              onClick={() => func(factory)}
+                            >
+                              <Image
+                                src={require('public/images/marker.png')}
+                                alt=""
+                                width={50}
+                                height={50}
+                              />
+                              <div className="title">{factory.title}</div>
+                            </div>
+                            <div className="content">
+                              <div
+                                className="box"
+                                onClick={() =>
+                                  goToControlPage({
+                                    page: 'elec',
+                                    value: factory.id,
+                                  })
+                                }
+                              >
+                                <div className="label">전기에너지</div>
+                                <div
+                                  className={
+                                    factory.electronic ? 'status' : 'status err'
+                                  }
+                                >
+                                  <FontAwesomeIcon
+                                    icon={
+                                      factory.electronic
+                                        ? faFaceSmile
+                                        : faFaceSadTear
+                                    }
+                                  />
+                                </div>
+                              </div>
+                              <div
+                                className="box"
+                                onClick={() =>
+                                  goToControlPage({
+                                    page: 'rotation',
+                                    value: factory.id,
+                                  })
+                                }
+                              >
+                                <div className="label">회전기기 제어</div>
+                                <div
+                                  className={
+                                    factory.heats ? 'status' : 'status err'
+                                  }
+                                >
+                                  <FontAwesomeIcon
+                                    icon={
+                                      factory.heats
+                                        ? faFaceSmile
+                                        : faFaceSadTear
+                                    }
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })}
                     </div>
-                    {list.label}
-                  </div>
-                  {list.data?.map((factory, k) => {
-                    return (
+                  )
+                })
+              : factory.AIBoutureFactorys.map((factory, i) => {
+                  return (
+                    <div className="factory-box" key={i}>
                       <div
-                        className={
-                          factory.electronic && factory.heats
-                            ? 'factory'
-                            : 'factory error'
-                        }
-                        key={k}
+                        className={factory.heats ? 'factory' : 'factory error'}
                       >
                         <div className="img-box" onClick={() => func(factory)}>
                           <Image
@@ -111,36 +199,12 @@ const RightPannelComp = observer(
                             className="box"
                             onClick={() =>
                               goToControlPage({
-                                page: 'elec',
+                                page: 'steam',
                                 value: factory.id,
                               })
                             }
                           >
-                            <div className="label">전기에너지</div>
-                            <div
-                              className={
-                                factory.electronic ? 'status' : 'status err'
-                              }
-                            >
-                              <FontAwesomeIcon
-                                icon={
-                                  factory.electronic
-                                    ? faFaceSmile
-                                    : faFaceSadTear
-                                }
-                              />
-                            </div>
-                          </div>
-                          <div
-                            className="box"
-                            onClick={() =>
-                              goToControlPage({
-                                page: 'rotation',
-                                value: factory.id,
-                              })
-                            }
-                          >
-                            <div className="label">회전기기 제어</div>
+                            <div className="label">스팀에너지</div>
                             <div
                               className={
                                 factory.heats ? 'status' : 'status err'
@@ -155,11 +219,9 @@ const RightPannelComp = observer(
                           </div>
                         </div>
                       </div>
-                    )
-                  })}
-                </div>
-              )
-            })}
+                    </div>
+                  )
+                })}
           </div>
         </div>
       </div>

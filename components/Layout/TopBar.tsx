@@ -76,39 +76,39 @@ export const SubHeader = observer((): JSX.Element => {
     const text =
       store.subpage === 'elec'
         ? thisFactory.title + ' 전기 에너지 효율화 대시보드'
-        : thisFactory.title + ' 회전기기 에너지 효율화 대시보드'
+        : store.subpage === 'rotation'
+        ? thisFactory.title + ' 회전기기 에너지 효율화 대시보드'
+        : thisFactory.title + ' 스팀기기 에너지 효율화 대시보드'
     setTitle(text)
   }, [])
 
   return (
     <div className="top-header">
-      <div className="menu-box">
-        {store.module === 'AIX' ? (
-          <>
-            <div className="home" onClick={() => goToControlPage('home')}>
-              <FontAwesomeIcon icon={faHouseChimney} />
+      {store.module === 'AIX' ? (
+        <div className="menu-box">
+          <div className="home" onClick={() => goToControlPage('home')}>
+            <FontAwesomeIcon icon={faHouseChimney} />
+          </div>
+          <div className="sub-box">
+            <div
+              className={store.subpage === 'elec' ? 'select menu' : 'menu'}
+              onClick={() => goToControlPage('elec')}
+            >
+              전기에너지
             </div>
-            <div className="sub-box">
-              <div
-                className={store.subpage === 'elec' ? 'select menu' : 'menu'}
-                onClick={() => goToControlPage('elec')}
-              >
-                전기에너지
-              </div>
-              <div
-                className={
-                  store.subpage === 'rotation' ? 'select menu' : 'menu'
-                }
-                onClick={() => goToControlPage('rotation')}
-              >
-                회전기기
-              </div>
+            <div
+              className={store.subpage === 'rotation' ? 'select menu' : 'menu'}
+              onClick={() => goToControlPage('rotation')}
+            >
+              회전기기
             </div>
-          </>
-        ) : (
-          ''
-        )}
-      </div>
+          </div>
+        </div>
+      ) : (
+        <div className="home" onClick={() => goToControlPage('home')}>
+          <FontAwesomeIcon icon={faHouseChimney} />
+        </div>
+      )}
       <div className="title">{title}</div>
       <div className="right-box">
         <div className="logout" onClick={showModal}>
