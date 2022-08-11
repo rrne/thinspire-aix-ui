@@ -120,3 +120,28 @@ export type SteamTrapDignosisBG = {
   intemp: number
   outtemp: number
 }
+export type SteamTrapCondition = {
+  devId: number
+  inTemp: number
+  outTemp: number
+  pointName: string
+  trapType: string
+  status: number
+}
+export type ElecPPCondition = {
+  devId: string
+  pointName: string
+  femsTime: string
+  total_wh: number
+  maximum_wh: number
+  percent: number
+}
+export type FemsGraphData = {
+  dev_time: number
+  in_temp?: number
+  out_temp?: number
+  act_kwh?: number
+  react_kwh?: number
+  point_name: string
+  holiday: number
+}

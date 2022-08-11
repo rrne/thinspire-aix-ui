@@ -25,7 +25,7 @@
     .panel {
       width: 100%;
       position: relative;
-      background: radial-gradient(#03152b 50%, #041f42);
+      background: #061830d0;
       border: 1px solid #2a4364;
       box-shadow: 0 0 4px #05418575;
       border-radius: 12px;
@@ -98,6 +98,177 @@
     }
     .trap-dignosis {
       height: 40%;
+    }
+  }
+  .right-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 17%;
+    height: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    background: #061830d0;
+    border: 1px solid #2a4364;
+    box-shadow: 0 0 4px #05418575;
+    border-radius: 12px;
+    .title-box {
+      height: 40px;
+    }
+    .btn-box {
+      gap: 6px;
+      display: flex;
+      padding: 0 16px;
+      height: 30px;
+      .btn {
+        padding: 2px 12px;
+        border-radius: 10px;
+        background: #264b76;
+        border: 1px solid #284467;
+        cursor: pointer;
+        transition: 0.25s;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        &.select {
+          color: #42bbff;
+          background: #032b4f;
+        }
+      }
+      .btn:hover {
+        background: #032b4f;
+      }
+    }
+    .content-box {
+      margin-top: 10px;
+      height: calc(100% - 90px);
+      width: 100%;
+      padding: 0 10px;
+      overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-bottom: 11px;
+      .trap {
+        background: #002e53ba;
+        border-radius: 12px;
+        width: 100%;
+        height: 130px;
+        box-shadow: inset 0 0 20px #045092de;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        cursor: pointer;
+        border: 1px solid #006efd00;
+        transition: 0.25s;
+        .img-box {
+          width: 40%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          img {
+            height: 60%;
+          }
+          .title {
+            font-size: 13px;
+            white-space: nowrap;
+          }
+        }
+        .value-box {
+          width: 58%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          align-items: center;
+          justify-content: center;
+          .value {
+            width: 100%;
+            display: flex;
+            padding: 8px 10px;
+            background: #154873;
+            border-radius: 10px;
+            justify-content: space-between;
+            align-items: center;
+            .label {
+              width: 40%;
+              white-space: nowrap;
+            }
+            .temp-box {
+              width: 60%;
+              display: flex;
+              .temp {
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #42bbff;
+                font-size: 16px;
+                font-weight: 500;
+                span {
+                  font-size: 12px;
+                  margin-left: 2px;
+                  color: white;
+                  font-weight: 200;
+                }
+                &.in {
+                  position: relative;
+                }
+                &.in::after {
+                  position: absolute;
+                  content: '';
+                  top: 50%;
+                  right: 0;
+                  transform: translateY(-50%);
+                  width: 1px;
+                  height: 50%;
+                  background: rgba(255, 255, 255, 0.323);
+                }
+              }
+            }
+            .status {
+              font-size: 18px;
+              color: #00c809;
+            }
+          }
+        }
+      }
+      .trap:hover {
+        transform: translate(1px, 1px);
+        border: 1px solid #1266d3;
+      }
+      .elec {
+        background: #06243dba;
+        border-radius: 20px;
+        width: 100%;
+        height: 50px;
+        box-shadow: inset 0 0 20px #032c50de;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        cursor: pointer;
+        border: 1px solid #1d5caeba;
+        transition: 0.25s;
+        align-items: center;
+        padding: 10px;
+        .title {
+          width: 45%;
+          padding-left: 6px;
+          white-space: nowrap;
+        }
+        .value-box {
+          width: 55%;
+        }
+      }
+      .elec:hover {
+        transform: translate(1px, 1px);
+        border: 1px solid #75aef8;
+      }
+      .spin {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 }

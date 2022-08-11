@@ -15,6 +15,7 @@ const SteamPage: NextPage = () => {
     steam.getSteamTrapStatusAPI(factoryNum)
     steam.getSteamTrapCountAPI(factoryNum)
     steam.getSteamTrapDignosisAPI(factoryNum)
+    steam.getSteamTrapConditionAPI(factoryNum)
   }, [])
   return (
     <Layout title="steam" mainpage={false}>
