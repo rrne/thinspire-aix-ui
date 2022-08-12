@@ -122,11 +122,18 @@ export const SubHeader = observer((): JSX.Element => {
 })
 
 const ModalComp = ({ visible, cancel }) => {
+  const router = useRouter()
+  const handleLogout = () => {
+    router.push('/login')
+    sessionStorage.clear()
+  }
   return (
     <Modal visible={visible} footer={null}>
       <div className="title">로그아웃 하시겠습니까?</div>
       <div className="btn-box">
-        <div className="confirm">확인</div>
+        <div className="confirm" onClick={handleLogout}>
+          확인
+        </div>
         <div className="cancel" onClick={cancel}>
           취소
         </div>
