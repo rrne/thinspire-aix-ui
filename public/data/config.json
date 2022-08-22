@@ -1,0 +1,16 @@
+{
+    "AI":[
+        {
+            "id": "admin",
+            "pw" : "admin",
+            "name": "admin"
+        }
+    ],
+    "AIX":[
+        {
+            "id": "admin",
+            "pw" : "admin",
+            "name": "admin"
+        }
+    ]
+}

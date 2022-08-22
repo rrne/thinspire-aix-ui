@@ -11,22 +11,28 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import useStore from 'stores'
 
 const Login: NextPage = () => {
   const router = useRouter()
+  const store = useStore()
+
+  // useEffect(() => {
+  //   router.events.on("routeChangeStart", () => router.push('/login'))
+  // },[])
 
   const [id, setId] = useState('')
   const [pw, setPw] = useState('')
 
-  const confirmLogin = () => {
+  const confirmLogin = async () => {
     if (id === '' || pw === '') {
       message.error('양식을 완성해 주세요')
       return
     }
-    axios.post('/api/login', { id: id, pw: pw }).then((res) => {
-      if (res.status === 201) {
-        console.log(res)
 
+   await axios.post('/api/login', { id: id, pw: pw, type:store.Main.module },).then((res) => {
+      if (res.status === 201) {
+        router.reload()
         router.push('/')
         message.success(res.data.message)
       } else {
@@ -41,6 +47,7 @@ const Login: NextPage = () => {
   const inputPW = (value) => {
     setPw(value.target.value)
   }
+
   return (
     <div className="login-page">
       <div className="bg">
@@ -98,4 +105,3 @@ const Login: NextPage = () => {
 }
 
 export default Login
-//jira test

@@ -1,5 +1,5 @@
 import Timer from './Timer'
-import { Modal } from 'antd'
+import { Modal,message } from 'antd'
 import { useState, useCallback, useEffect } from 'react'
 import {
   faFireFlameCurved,
@@ -8,7 +8,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useStore from 'stores'
 import { useRouter } from 'next/router'
-import { observer } from 'mobx-react'
+import { observer } from 'mobx-react';
+import axios from 'axios'
 
 export const MainHeader = (): JSX.Element => {
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -124,9 +125,14 @@ export const SubHeader = observer((): JSX.Element => {
 const ModalComp = ({ visible, cancel }) => {
   const router = useRouter()
   const handleLogout = () => {
+    axios.post('/api/logout').then((res) => {
+      message.success(res.data.message)
+    })
+    router.reload()
     router.push('/login')
-    sessionStorage.clear()
   }
+
+
   return (
     <Modal visible={visible} footer={null}>
       <div className="title">로그아웃 하시겠습니까?</div>

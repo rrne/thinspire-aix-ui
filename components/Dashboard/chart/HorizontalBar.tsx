@@ -6,8 +6,6 @@ const HorizontalBar = ({data}) => {
 
     useEffect(() => {
         if(data.length === 0) return;
-        console.log(data);
-        
         const dataArr = [{
             type: 'bar',
             barWidth: 8,

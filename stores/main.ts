@@ -37,7 +37,7 @@ const Main = observable<MainStore>({
   AINews: [],
   async getNewsAPI() {
     await axios
-      .get('http://localhost:8000/search/news', { params: { query: 'AIX' } })
+      .get('/search/news', { params: { query: 'AIX' } })
       .then((res) => {
         runInAction(() => {
           this.newsData = res.data.items

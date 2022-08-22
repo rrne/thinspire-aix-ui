@@ -78,7 +78,7 @@ const ModalComp = observer(
         </div>
         <div className="chart-conent">
           {store.femsGraphData.length !== 0 ? (
-            <FemsTrendChart type={type} />
+            <FemsTrendChart type={props.type} />
           ) : (
             <Empty />
           )}
