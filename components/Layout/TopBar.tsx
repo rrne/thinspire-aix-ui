@@ -85,7 +85,7 @@ export const SubHeader = observer((): JSX.Element => {
 
   return (
     <div className="top-header">
-      {store.module === 'AIX' ? (
+      {store.module === 'AI' ? (
         <div className="menu-box">
           <div className="home" onClick={() => goToControlPage('home')}>
             <FontAwesomeIcon icon={faHouseChimney} />

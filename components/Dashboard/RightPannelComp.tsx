@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { AIXFactoryType } from 'types/FactoryType'
+import { AIFactoryType } from 'types/FactoryType'
 import Image from 'next/image'
 import {
   faFaceSmile,
@@ -36,7 +36,7 @@ const RightPannelComp = observer(
     type PannelData = {
       label: string
       className: string
-      data: AIXFactoryType[]
+      data: AIFactoryType[]
     }
 
     const pannel: PannelData[] = [
@@ -67,7 +67,7 @@ const RightPannelComp = observer(
 
     return (
       <div
-        className={store.module === 'AIX' ? 'right-pannel' : 'AIright-pannel'}
+        className={store.module === 'AI' ? 'right-pannel' : 'AIright-pannel'}
       >
         <div className="right-box">
           <div className="title-box">
@@ -91,7 +91,7 @@ const RightPannelComp = observer(
             )}
           </div>
           <div className="content">
-            {store.module === 'AIX'
+            {store.module === 'AI'
               ? pannel.map((list, i) => {
                   return (
                     <div className={list.className + ' factory-box'} key={i}>

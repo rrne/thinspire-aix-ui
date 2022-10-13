@@ -1,4 +1,4 @@
-export type AIXFactoryType = {
+export type AIFactoryType = {
   id: number
   title: string
   electronic: boolean
@@ -7,7 +7,7 @@ export type AIXFactoryType = {
   location: [number, number]
   code: string
 }
-export type AIFactoryType = {
+export type AIXFactoryType = {
   id: number
   title: string
   heats: boolean

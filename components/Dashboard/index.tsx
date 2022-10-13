@@ -17,7 +17,7 @@ const Dashboard = (): JSX.Element => {
     setPanelFactory({
       title: 'total',
       location:
-        store.module === 'AIX'
+        store.module === 'AI'
           ? [127.19614998984213, 35.01116689472127]
           : [127.8, 36.7],
     })

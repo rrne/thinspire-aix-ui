@@ -8,14 +8,14 @@ import axios from 'axios'
 
 interface FactoryStore {
   AIXFactorys: AIXFactoryType[]
-  AIXFactorysBig: BigFactoryType[]
+  AIFactorysBig: BigFactoryType[]
   AIBoutureFactorys: AIFactoryType[]
   apiCallCount: number
   getCurrentStatus: () => void
 }
 
 const Factory = observable<FactoryStore>({
-  AIXFactorys: [
+  AIBoutureFactorys: [
     {
       id: 2005007001,
       title: '아이지스',
@@ -54,7 +54,7 @@ const Factory = observable<FactoryStore>({
     },
     {
       id: 2005007005,
-      title: '재원산업',
+      title: '재원산업(주)',
       electronic: true,
       heats: true,
       error: true,
@@ -63,7 +63,7 @@ const Factory = observable<FactoryStore>({
     },
     {
       id: 2005007006,
-      title: '에스에프시',
+      title: '(주)에스에프시',
       electronic: true,
       heats: true,
       error: true,
@@ -71,7 +71,7 @@ const Factory = observable<FactoryStore>({
       code: 'Y',
     },
   ],
-  AIXFactorysBig: [
+  AIFactorysBig: [
     {
       title: '광주',
       error: true,
@@ -85,7 +85,7 @@ const Factory = observable<FactoryStore>({
       code: 'Y',
     },
   ],
-  AIBoutureFactorys: [
+  AIXFactorys: [
     {
       id: 2005007001,
       title: '롯데칠성음료 안성공장',
@@ -112,31 +112,31 @@ const Factory = observable<FactoryStore>({
       .then((res) => {
         runInAction(() => {
           this.apiCallCount++
-          for (let i = 0; i < this.AIXFactorys.length; i++) {
-            this.AIXFactorys[i].electronic = true
-            this.AIXFactorys[i].heats = true
+          for (let i = 0; i < this.AIBoutureFactorys.length; i++) {
+            this.AIBoutureFactorys[i].electronic = true
+            this.AIBoutureFactorys[i].heats = true
           }
-          for (let i = 0; i < this.AIXFactorysBig.length; i++) {
-            this.AIXFactorysBig[i].error = true
-            this.AIXFactorysBig[i].error = true
+          for (let i = 0; i < this.AIFactorysBig.length; i++) {
+            this.AIFactorysBig[i].error = true
+            this.AIFactorysBig[i].error = true
           }
 
           for (let i = 0; i < res.data.length; i++) {
-            let idx = this.AIXFactorys.findIndex(
+            let idx = this.AIBoutureFactorys.findIndex(
               (list) => list.id === res.data[i].siteid
             )
 
             if (res.data.class === 'elec') {
-              this.AIXFactorys[idx].electronic = false
+              this.AIBoutureFactorys[idx].electronic = false
             } else {
-              this.AIXFactorys[idx].heats = false
+              this.AIBoutureFactorys[idx].heats = false
             }
-            this.AIXFactorys[idx].error = false
+            this.AIBoutureFactorys[idx].error = false
 
-            if (this.AIXFactorys[idx].code === 'G') {
-              this.AIXFactorysBig[0].error = false
+            if (this.AIBoutureFactorys[idx].code === 'G') {
+              this.AIFactorysBig[0].error = false
             } else {
-              this.AIXFactorysBig[1].error = false
+              this.AIFactorysBig[1].error = false
             }
           }
         })

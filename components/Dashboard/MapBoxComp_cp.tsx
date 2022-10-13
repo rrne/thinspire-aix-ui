@@ -26,9 +26,9 @@ const MapBoxComp = observer(
     })
 
     const [storeData, setStoreData] = useState(
-      store.module === 'AIX'
-        ? factory.AIXFactorysBig
-        : factory.AIBoutureFactorys
+      store.module === 'AI'
+        ? factory.AIFactorysBig
+        : factory.AIXFactorys
     )
 
     const [select, setSelect] = useState('total')
@@ -83,7 +83,7 @@ const MapBoxComp = observer(
     const MAP_STYLE = 'mapbox://styles/coco-wapplab/cl63e9uym007r14nxxc660ghg'
 
     const [viewport, setViewport] = useState(
-      store.module === 'AIX'
+      store.module === 'AI'
         ? ({
             latitude: 35.01116689472127,
             longitude: 127.19614998984213,
@@ -124,9 +124,9 @@ const MapBoxComp = observer(
         )
       } else {
         setStoreData(
-          store.module === 'AIX'
-            ? factory.AIXFactorysBig
-            : factory.AIBoutureFactorys
+          store.module === 'AI'
+            ? factory.AIFactorysBig
+            : factory.AIXFactorys
         )
       }
     }

@@ -13,7 +13,7 @@ const nextConfig = withImages(
     images: {
       disableStaticImages: true,
     },
-    distDir : "build",
+    assetPrefix: ".", // 배포모드 설정
     trailingSlash: true,
   })
 )

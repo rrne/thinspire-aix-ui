@@ -10,7 +10,8 @@ const db_config = require('./public/data/config.json');
 const dev = process.env.NODE_ENV !== 'production';
 const prod = process.env.NODE_ENV === 'production';
 
-const app = next({dev});
+const PORT = 3000;
+const app = next({prod});
 
 const client_id = 'SoQV5w9nxC9FngFrGPEu';
 const client_secret = 'PWGxmttGcF';
@@ -19,8 +20,8 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
     server.use(cors());
-    server.use(express.json())
-    server.use(express.urlencoded({ extended: true }))
+    server.use(express.json());
+    server.use(express.urlencoded({ extended: true }));
     server.use(session({
       secret: "secret",
       resave: false,
@@ -117,6 +118,6 @@ app.prepare().then(() => {
       next()
   });
    
-  server.listen(3000, () => console.log('> next + expresss running on http://localhost:3000'))
+  server.listen(PORT, () => console.log(`> next + expresss running on port: ${PORT}`))
 })
 
