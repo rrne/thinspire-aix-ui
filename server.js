@@ -4,7 +4,6 @@ const server = express();
 const next = require('next')
 const request = require('request');
 const session = require('express-session')
-const FileStore = require('session-file-store')(session)
 const db_config = require('./public/data/config.json');
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -19,6 +18,7 @@ const client_secret = 'PWGxmttGcF';
 const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
+    console.log(process.env.NODE_ENV)
     server.use(cors());
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));

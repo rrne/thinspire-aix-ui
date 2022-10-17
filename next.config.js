@@ -13,8 +13,9 @@ const nextConfig = withImages(
     images: {
       disableStaticImages: true,
     },
-    assetPrefix: ".", // 배포모드 설정
+    // assetPrefix: ".", // 배포모드 설정
     trailingSlash: true,
+    useFileSystemPublicRoutes: false
   })
 )
 
