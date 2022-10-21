@@ -10,7 +10,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const prod = process.env.NODE_ENV === 'production';
 
 const PORT = 3000;
-const app = next({prod});
+const app = next({dev});
 
 const client_id = 'SoQV5w9nxC9FngFrGPEu';
 const client_secret = 'PWGxmttGcF';

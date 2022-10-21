@@ -23,11 +23,13 @@ const Dashboard = (): JSX.Element => {
     })
   }
   useEffect(() => {
-    store.getDailyUsage()
-    store.getMonthlyUsage()
-    store.getMonthlySteamStatus()
-    store.getSteamCount()
-    factory.getCurrentStatus()
+    store.getDailyUsage("gj")
+    store.getDailyUsage("ys")
+    store.getMonthlyUsage("gj")
+    store.getMonthlyUsage("ys")
+    // store.getMonthlySteamStatus()
+    // store.getSteamCount()
+    // factory.getCurrentStatus()
   }, [])
   return (
     <div className="dashboard">

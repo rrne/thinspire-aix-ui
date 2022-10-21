@@ -12,10 +12,10 @@ const ElecPage: NextPage = () => {
     store.changeSubpage('elec')
     const factoryNum = sessionStorage.getItem('factory')
     elec.getUsageChargeAPI(factoryNum)
-    elec.getDailyPredictAPI(factoryNum)
-    elec.getMonthlyPredictAPI(factoryNum)
-    elec.getDignosticPlanAPI(factoryNum)
-    elec.getCsvData()
+    // elec.getDailyPredictAPI(factoryNum)
+    // elec.getMonthlyPredictAPI(factoryNum)
+    // elec.getDignosticPlanAPI(factoryNum)
+    // elec.getCsvData()
   }, [])
 
   return (

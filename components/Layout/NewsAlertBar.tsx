@@ -25,7 +25,9 @@ const NewsAlertBar = (): JSX.Element => {
         <FontAwesomeIcon icon={faClipboardList}/>
         </div>
         </div>
-        <div className="content"><AIMarquee/></div>
+        <div className="content">
+          <AIMarquee/>
+          </div>
       </div>
     </div>
   )

@@ -15,20 +15,20 @@ const LeftPannelComp = observer((): JSX.Element => {
 
     const leftCompArray :LeftComp[] = [
         {
-            title: "일별 전력 사용량 분석",
-            component: <ElecUsageComp />
+            title: "광주 일별 전력 사용량 분석",
+            component: <ElecUsageComp region="gj" />
         },
         {
-            title: "월별 전력 사용량 분석",
-            component: <VerticalBar data={store.monthlyUsage} />
+            title: "광주 월별 전력 사용량 분석",
+            component: <VerticalBar data={store.gjMonthlyUsage} />
         },
         {
-            title: "월별 스팀 상태 분석",
-            component: <VerticalBarTwoOpt data={store.monthlySteamStatus} />
+            title: "여수 일별 전력 사용량 분석",
+            component: <ElecUsageComp region="ys"/>
         },
         {
-            title: "월별 스팀 상태 분석",
-            component: <HorizontalBar data={store.steamCount} />
+            title: "여수 월별 전력 사용량 분석",
+            component: <VerticalBar data={store.ysMonthlyUsage} />
         },
     ]
   
@@ -54,7 +54,7 @@ const LeftPannelComp = observer((): JSX.Element => {
 export default LeftPannelComp;
 
 // 일별 전력 사용량 분석 컴포넌트✨
-const ElecUsageComp = ():JSX.Element => {
+const ElecUsageComp = ({region}:{region:string}):JSX.Element => {
     const store = useStore().Main
 
     type TypeDailyUsage = {
@@ -65,8 +65,8 @@ const ElecUsageComp = ():JSX.Element => {
     const [dailyUsage, setDailyUsage] = useState<TypeDailyUsage[]>(null)
 
     useEffect(() => {
-        if(!store.dailyUsage)return;
-        const data = store.dailyUsage
+        if(!store.gjDailyUsage || !store.ysDailyUsage)return;
+        const data = region === "gj" ? store.gjDailyUsage :store.ysDailyUsage;
 
         const daily :TypeDailyUsage[] = [
             {
@@ -87,7 +87,7 @@ const ElecUsageComp = ():JSX.Element => {
             }
         ]
         setDailyUsage(daily)
-    },[store.dailyUsage])
+    },[store.gjDailyUsage, store.ysDailyUsage])
 
     return(
         <div className="elec-usage">

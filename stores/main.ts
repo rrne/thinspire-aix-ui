@@ -12,14 +12,16 @@ interface MainStore {
   module: string
   subpage: string
   newsData: NewsType[]
-  dailyUsage: DailyUsage
-  monthlyUsage: MonthlyUsage[]
+  gjDailyUsage: DailyUsage
+  ysDailyUsage: DailyUsage
+  gjMonthlyUsage: MonthlyUsage[]
+  ysMonthlyUsage: MonthlyUsage[]
   monthlySteamStatus: MonthlySteamStatus[]
   steamCount: SteamCount[]
   AINews: AINews[]
   getNewsAPI: () => void
-  getDailyUsage: () => void
-  getMonthlyUsage: () => void
+  getDailyUsage: (region:string) => void
+  getMonthlyUsage: (region:string) => void
   getMonthlySteamStatus: () => void
   getSteamCount: () => void
   getAIAlarm: () => void
@@ -30,8 +32,10 @@ const Main = observable<MainStore>({
   module: 'AI',
   subpage: 'elec',
   newsData: [],
-  dailyUsage: null,
-  monthlyUsage: [],
+  gjDailyUsage: null,
+  ysDailyUsage: null,
+  gjMonthlyUsage: [],
+  ysMonthlyUsage: [],
   monthlySteamStatus: [],
   steamCount: [],
   AINews: [],
@@ -44,21 +48,21 @@ const Main = observable<MainStore>({
         })
       })
   },
-  async getDailyUsage() {
+  async getDailyUsage(region) {
     await axios
-      .post('http://175.123.142.155:28887/main/elec/daily-usage')
+      .get(`http://175.123.142.155:58888/main/daily-usage/${region}`)
       .then((res) => {
         runInAction(() => {
-          this.dailyUsage = res.data[0]
+         region === "gj" ?  this.gjDailyUsage = res.data.data :  this.ysDailyUsage = res.data.data
         })
       })
   },
-  async getMonthlyUsage() {
+  async getMonthlyUsage(region) {
     await axios
-      .post('http://175.123.142.155:28887/main/elec/monthly-usage')
+      .get(`http://175.123.142.155:58888/main/monthly-usage/${region}`)
       .then((res) => {
         runInAction(() => {
-          this.monthlyUsage = res.data
+          region === "gj" ?  this.gjMonthlyUsage = res.data.data :  this.ysMonthlyUsage = res.data.data
         })
       })
   },
