@@ -1,6 +1,6 @@
 .rotation-page {
   width: 100%;
-  height: calc(100% - 140px);
+  height: calc(100% - 110px);
   position: relative;
   overflow: hidden;
   padding: 20px;
@@ -40,6 +40,9 @@
         border-radius: 12px;
         .title {
           font-size: 18px;
+        }
+        img{
+          height: 60%;
         }
       }
       .value-box {

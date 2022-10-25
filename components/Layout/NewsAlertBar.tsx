@@ -19,7 +19,7 @@ const NewsAlertBar = (): JSX.Element => {
         <div className="title">시화산단 뉴스</div>
         <div className="content"><Marquee/></div>
       </div>
-      <div className="box">
+      {/* <div className="box">
         <div className="title">AI공지
         <div className="icon">
         <FontAwesomeIcon icon={faClipboardList}/>
@@ -28,7 +28,7 @@ const NewsAlertBar = (): JSX.Element => {
         <div className="content">
           <AIMarquee/>
           </div>
-      </div>
+      </div> */}
     </div>
   )
 }

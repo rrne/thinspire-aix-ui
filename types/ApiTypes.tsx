@@ -44,6 +44,15 @@ export type UseageType = [
     future_cost: string
   }
 ]
+export type ElecUsageStatus =
+  {
+    devId: string
+    femsTime: string
+    maximum_wh: number
+    percent: number
+    pointName: string
+    total_wh: number
+  }
 
 export type DailyPredict = {
   time: number

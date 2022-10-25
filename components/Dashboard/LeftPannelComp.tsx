@@ -70,11 +70,11 @@ const ElecUsageComp = ({region}:{region:string}):JSX.Element => {
 
         const daily :TypeDailyUsage[] = [
             {
-                title: moment(data.yesterday_time).format("MM / DD"),
+                title: moment.unix(data.yesterday_time).format("MM / DD"),
                 data: data.yesterday_elec
             },
             {
-                title: moment(data.lastweek_time).format("MM / DD"),
+                title: moment.unix(data.lastweek_time).format("MM / DD"),
                 data: data.lastweek_elec
             },
             {

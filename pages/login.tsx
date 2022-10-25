@@ -66,6 +66,9 @@ const Login: NextPage = () => {
             <br />
             효율화 종합 대시보드
           </div>
+          <div className="sub-title">
+            회전기기 부하 최적제어로 에너지 절감
+          </div>
         </div>
       </div>
       <div className="half-box">

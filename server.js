@@ -10,7 +10,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const prod = process.env.NODE_ENV === 'production';
 
 const PORT = 3000;
-const app = next({dev});
+const app = next({prod});
 
 const client_id = 'SoQV5w9nxC9FngFrGPEu';
 const client_secret = 'PWGxmttGcF';
@@ -18,7 +18,6 @@ const client_secret = 'PWGxmttGcF';
 const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
-    console.log(process.env.NODE_ENV)
     server.use(cors());
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Map, { Source, Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import type { MapRef, GeoJSONSource } from 'react-map-gl'
+import type { MapRef } from 'react-map-gl'
 import { GeoTypes } from './Map/geoData'
 import Image from 'next/image'
 import { observer } from 'mobx-react-lite'

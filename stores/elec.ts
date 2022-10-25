@@ -5,6 +5,7 @@ import {
   DignosticPlan,
   CsvData,
   PPgraphData,
+  ElecUsageStatus
 } from 'types/ApiTypes'
 import { runInAction, observable } from 'mobx'
 import axios from 'axios'
@@ -12,12 +13,14 @@ import axios from 'axios'
 interface ElecStore {
   useageCharge: UseageType
   dailyPredict: DailyPredict[]
+  elecUsageStatus: ElecUsageStatus[]
   monthlyPredict: MonthlyPredict[]
   dignosticPlan: DignosticPlan[]
   csvData: CsvData[]
   ppgraphData: PPgraphData
   downloadPPTrendData: string[]
   getUsageChargeAPI: (id: string) => void
+  getElecUsageStatusAPI: (id: string) => void
   getDailyPredictAPI: (id: string) => void
   getMonthlyPredictAPI: (id: string) => void
   getDignosticPlanAPI: (id: string) => void
@@ -29,6 +32,7 @@ interface ElecStore {
 const Elec = observable<ElecStore>({
   useageCharge: null,
   dailyPredict: [],
+  elecUsageStatus:[],
   monthlyPredict: [],
   dignosticPlan: [],
   csvData: [],
@@ -42,6 +46,17 @@ const Elec = observable<ElecStore>({
       .then((res) => {
         runInAction(() => {
           this.useageCharge = res.data
+        })
+      })
+  },
+  async getElecUsageStatusAPI(id) {
+    await axios
+      .post('http://175.123.142.155:28887/sub/elec/power_plant_details', {
+        siteid: id,
+      })
+      .then((res) => {
+        runInAction(() => {
+          this.elecUsageStatus = res.data;
         })
       })
   },
