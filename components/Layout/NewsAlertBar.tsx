@@ -16,7 +16,7 @@ const NewsAlertBar = (): JSX.Element => {
   return (
     <div className="news-bar">
       <div className="box">
-        <div className="title">시화산단 뉴스</div>
+        <div className="title">산단뉴스</div>
         <div className="content"><Marquee/></div>
       </div>
       {/* <div className="box">

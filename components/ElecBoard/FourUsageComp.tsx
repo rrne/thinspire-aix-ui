@@ -7,22 +7,22 @@ const FourUsageComp = observer((): JSX.Element => {
     ? [
         {
           title: '실시간 사용량',
-          data: elec.useageCharge[0].now_kwh,
+          data: elec.useageCharge.items.now_kwh,
           unit: 'kWh',
         },
         {
           title: '실시간 요금',
-          data: elec.useageCharge[0].now_cost,
+          data: elec.useageCharge.items.now_cost,
           unit: '원',
         },
         {
           title: '예상 사용량',
-          data: elec.useageCharge[0].future_kwh,
+          data: elec.useageCharge.items.future_kwh,
           unit: 'kWh',
         },
         {
           title: '예상 요금',
-          data: elec.useageCharge[0].future_cost,
+          data: elec.useageCharge.items.future_cost,
           unit: '원',
         },
       ]

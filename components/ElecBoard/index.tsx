@@ -6,10 +6,10 @@ import DailyPredictChart from './chart/DailyPredictChart'
 import DignosticPlanChart from './chart/DignosticPlanChart'
 import { Modal } from 'antd'
 import ModalComp from './ModalComp'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useStore from 'stores'
 
-const ElecBoard = (): JSX.Element => {
+const ElecBoard = ({fac}): JSX.Element => {
   const store = useStore().Elec
 
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -35,7 +35,7 @@ const ElecBoard = (): JSX.Element => {
         <div className="four-usagecomp" onClick={showModal}>
           <FourUsageComp />
         </div>
-        <DevicePosition />
+        <DevicePosition factoryNum={fac} />
       </div>
       <div className="data-box">
         <div className="smallChart-boxes">

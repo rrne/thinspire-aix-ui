@@ -5,6 +5,8 @@ import moment from "moment";
 const VerticalBar = ({data}) => {
 
     useEffect(() => {
+        console.log(data);
+        
         if(data.length === 0) return;
         const dataArr = [{
             type: 'bar',
@@ -32,7 +34,7 @@ const VerticalBar = ({data}) => {
         }
         for(let i = 0; i < data.length; i++){
             dataArr[0].data.push(data[i].monthly_elec)
-            xAxis.data.push(moment(data[i].time).format("hh"))
+            xAxis.data.push(moment(data[i].time*1000).format("MM"))
         }
         setOptions({
             ...options,

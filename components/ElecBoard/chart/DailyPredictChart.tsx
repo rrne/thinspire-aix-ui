@@ -8,12 +8,13 @@ const DailyPredictChart = observer(() => {
   const store = useStore().Elec
 
   useEffect(() => {
-    const data = store.dailyPredict
-    if (data.length === 0) return
-    const time: string[] = []
-    const real_value: number[] = []
-    const predict_value: number[] = []
-    const limit: number[] = []
+    const data = store.dailyPredict?.items
+    if (!data || data.length === 0) return;
+    
+    const time = []
+    const real_value = []
+    const predict_value = []
+    const limit = []
 
     for (let i = 0; i < data.length; i++) {
       time.push(moment(data[i].time * 1000).format('hh'))
@@ -22,8 +23,8 @@ const DailyPredictChart = observer(() => {
       limit.push(data[i].limit)
     }
 
-    const num = real_value.indexOf(null)
-    const today = time[num - 1]
+    // const num = real_value.indexOf(null)
+    // const today = time[num - 1]
 
     const options = {
       backgroundColor: 'rgba(0,0,0,0)',
@@ -67,12 +68,12 @@ const DailyPredictChart = observer(() => {
         left: '2%',
         right: '2%',
         bottom: '5%',
-        top: '20%',
+        top: '25%',
         containLabel: true,
       },
       legend: {
-        top: 5,
-        right: 0,
+        top: '15%',
+        right: "2%",
         data: ['사용량', '예측사용량'],
         textStyle: {
           fontSize: 12,
@@ -108,7 +109,7 @@ const DailyPredictChart = observer(() => {
         },
         data: time,
       },
-      yAxis: {
+      yAxis: [{
         splitLine: {
           show: true,
           lineStyle: {
@@ -136,6 +137,7 @@ const DailyPredictChart = observer(() => {
           show: false,
         },
       },
+    ],
       dataZoom: [
         {
           type: 'inside',
@@ -172,18 +174,18 @@ const DailyPredictChart = observer(() => {
             color: '#00BCD4',
           },
           data: predict_value,
-          markLine: {
-            lineStyle: {
-              type: 'solid',
-              width: 1,
-              color: '#69DADB',
-            },
-            data: [
-              {
-                xAxis: today,
-              },
-            ],
-          },
+          // markLine: {
+          //   lineStyle: {
+          //     type: 'solid',
+          //     width: 1,
+          //     color: '#69DADB',
+          //   },
+          //   data: [
+          //     {
+          //       xAxis: today,
+          //     },
+          //   ],
+          // },
         },
         {
           name: '임계치',
@@ -198,6 +200,7 @@ const DailyPredictChart = observer(() => {
       ],
     }
     setOptions(options)
+    
   }, [store.dailyPredict])
 
   const [options, setOptions] = useState({})

@@ -10,7 +10,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const prod = process.env.NODE_ENV === 'production';
 
 const PORT = 3000;
-const app = next({prod});
+const app = next({dev});
 
 const client_id = 'SoQV5w9nxC9FngFrGPEu';
 const client_secret = 'PWGxmttGcF';
@@ -26,6 +26,8 @@ app.prepare().then(() => {
       resave: false,
       saveUninitialized: true,
     }))
+
+    
     server.get('/search/news', function (req, res) {
       const api_url = 'https://openapi.naver.com/v1/search/news?display=30&query=' + encodeURI(req.query.query); // json 결과
     

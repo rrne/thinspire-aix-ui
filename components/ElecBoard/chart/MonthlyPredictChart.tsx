@@ -7,8 +7,8 @@ import useStore from 'stores'
 const MonthlyPredictChart = observer(() => {
   const store = useStore().Elec
   useEffect(() => {
-    const data = store.monthlyPredict
-    if (data.length === 0) return
+    const data = store.monthlyPredict?.items
+    if (!data || data.length === 0) return
     const time = []
     const real_value = []
     const predict_value = []
@@ -62,7 +62,7 @@ const MonthlyPredictChart = observer(() => {
       },
       legend: {
         top: '15%',
-        right: 0,
+        right: "2%",
         data: ['사용량', '예측사용량', '누적사용량', '예측 누적사용량'],
         textStyle: {
           fontSize: 10,
@@ -74,8 +74,8 @@ const MonthlyPredictChart = observer(() => {
         orient: 'horizontal',
       },
       grid: {
-        left: '2%',
-        right: '2%',
+        left: '3%',
+        right: '3%',
         bottom: '5%',
         top: '25%',
         containLabel: true,
@@ -238,6 +238,7 @@ const MonthlyPredictChart = observer(() => {
       ],
     }
     setOptions(options)
+    
   }, [store.monthlyPredict])
 
   const [options, setOptions] = useState({})

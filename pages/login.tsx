@@ -51,7 +51,7 @@ const Login: NextPage = () => {
   return (
     <div className="login-page">
       <div className="bg">
-        <Image src={require('public/images/BG.png')} layout="fill" alt="" />
+        <Image src={require('public/images/background.png')} layout="fill" alt="" />
       </div>
       <div className="half-box">
         <div className="title-box">

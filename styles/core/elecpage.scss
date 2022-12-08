@@ -1,13 +1,14 @@
 .elec-page {
   width: 100%;
-  height: calc(100% - 110px);
+  height: calc(100vh - 110px);
   position: relative;
   overflow: hidden;
   display: flex;
   gap: 20px;
   padding: 20px;
   .background {
-    width: 100%;
+    width: 105%;
+    height: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -25,7 +26,7 @@
       display: flex;
       gap: 10px;
       width: 100%;
-      height: 9%;
+      height: 70px;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
@@ -56,21 +57,57 @@
 
     .device-position {
       width: 100%;
-      height: 89%;
+      height: calc(100% - 90px);
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
 
-      .bg {
+      .ant-tabs-nav{
+        box-sizing: border-box;
+        margin: 0;
+      
+      }
+    
+      .ant-tabs-nav::before{
+        border-bottom: 1px solid #335d91;
+      }
+      .ant-tabs{
         width: 100%;
         height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
+        .ant-tabs-tab{
+          border: 1px solid #335d91;
+          border-bottom: 0;
+          position: relative;
+          &.ant-tabs-tab-active{
+            background: #141414;
+          }
+        }
+      
       }
+      .ant-tabs-content{
+        width: 100%;
+        height:100%;
+      }
+      .ant-tabs-content-holder{
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 10px;
+        overflow: hidden;
+        border: 1px solid #335d91;
+        border-top: 0;
+        height:calc(100% - 40px);
+      }
+
+      .bg {
+        height: 85%;
+        position: absolute;
+        top: 52%;
+        left: 50%;
+        z-index: -1;
+        transform: translate(-50%,-50%);
+      }
+
       .title-box {
         padding: 12px;
         position: absolute;
@@ -81,7 +118,7 @@
         width: 100%;
       }
       .table-box{
-        height: calc(100% - 46px);
+        height: 100%;
         width: 100%;
         overflow: hidden;
         .table{
@@ -193,6 +230,16 @@
               background: rgba(23, 42, 68, 0.61);
             }
           }
+        }
+      }
+      .ant-tabs-tabpane{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .img-box{
+          width: 90%;
+          height: 90%;
+          position: relative;
         }
       }
     }

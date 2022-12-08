@@ -5,7 +5,7 @@ import Link from 'next/link'
 const NotFound: NextPage = () => {
   return (
     <div className="err-page">
-      <img src={require('public/images/BG.png')} alt="" />
+      <img src={require('public/images/background.png')} alt="" />
       <div className="content">
         <h1>404</h1>
         <p>Page Not Found</p>

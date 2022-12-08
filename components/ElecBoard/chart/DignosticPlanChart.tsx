@@ -3,9 +3,11 @@ import { observer } from 'mobx-react-lite'
 import { useState, useEffect } from 'react'
 import useStore from 'stores'
 import moment from 'moment'
+import scatterBG from 'public/data/scatterbg.json'
 
 const DignosticPlanChart = observer(() => {
   const store = useStore().Elec
+  
 
   const convertData = (data) => {
     const result = []
@@ -33,9 +35,11 @@ const DignosticPlanChart = observer(() => {
         ? diagnosticData.push(data[i])
         : errorDiagnosticData.push(data[i])
     }
+    
+    const bgData = scatterBG.data;
 
-    for (let i = 0; i < store.csvData.length; i++) {
-      bgdata.push([store.csvData[i].act_kwh, store.csvData[i].react_kwh])
+    for (let i = 0; i < bgData.length; i++) {
+      bgdata.push([bgData[i].act_kwh, bgData[i].react_kwh])
     }
     const options = {
       backgroundColor: 'rgba(0,0,0,0)',

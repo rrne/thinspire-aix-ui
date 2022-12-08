@@ -12,17 +12,23 @@ import axios from 'axios'
 
 interface ElecStore {
   useageCharge: UseageType
-  dailyPredict: DailyPredict[]
+  dailyPredict: {
+    site:string;
+    items:DailyPredict[]
+  }
   elecUsageStatus: ElecUsageStatus[]
-  monthlyPredict: MonthlyPredict[]
+  monthlyPredict: {
+    site:string;
+    items:MonthlyPredict[]
+  }
   dignosticPlan: DignosticPlan[]
   csvData: CsvData[]
   ppgraphData: PPgraphData
   downloadPPTrendData: string[]
-  getUsageChargeAPI: (id: string) => void
+  getUsageChargeAPI: (factoryCode: string) => void
   getElecUsageStatusAPI: (id: string) => void
-  getDailyPredictAPI: (id: string) => void
-  getMonthlyPredictAPI: (id: string) => void
+  getDailyPredictAPI: (factoryCode: string) => void
+  getMonthlyPredictAPI: (factoryCode: string) => void
   getDignosticPlanAPI: (id: string) => void
   getPPGraphDataAPI: (id: string, period: string) => void
   downloadPPGraphDataAPI: (id: string, period: string) => void
@@ -31,21 +37,19 @@ interface ElecStore {
 
 const Elec = observable<ElecStore>({
   useageCharge: null,
-  dailyPredict: [],
+  dailyPredict: null,
   elecUsageStatus:[],
-  monthlyPredict: [],
+  monthlyPredict: null,
   dignosticPlan: [],
   csvData: [],
   ppgraphData: null,
   downloadPPTrendData: [],
-  async getUsageChargeAPI(id) {
+  async getUsageChargeAPI(factoryCode) {
     await axios
-      .post('http://175.123.142.155:28887/sub/elec/usage-charge', {
-        siteid: id,
-      })
+      .get(`http://175.123.142.155:58888/sub/power/usage-charge/${factoryCode}`)
       .then((res) => {
         runInAction(() => {
-          this.useageCharge = res.data
+          this.useageCharge = res.data.data
         })
       })
   },
@@ -60,25 +64,21 @@ const Elec = observable<ElecStore>({
         })
       })
   },
-  async getDailyPredictAPI(id) {
+  async getDailyPredictAPI(factoryCode) {
     await axios
-      .post('http://175.123.142.155:28887/sub/elec/daily-predict', {
-        siteid: id,
-      })
+    .get(`http://175.123.142.155:58888/sub/power/daily-predict/${factoryCode}`)
       .then((res) => {
         runInAction(() => {
-          this.dailyPredict = res.data
+          this.dailyPredict = res.data.data
         })
       })
   },
-  async getMonthlyPredictAPI(id) {
+  async getMonthlyPredictAPI(factoryCode) {
     await axios
-      .post('http://175.123.142.155:28887/sub/elec/monthly-predict', {
-        siteid: id,
-      })
+    .get(`http://175.123.142.155:58888/sub/power/monthly-predict/${factoryCode}`)
       .then((res) => {
         runInAction(() => {
-          this.monthlyPredict = res.data
+          this.monthlyPredict = res.data.data
         })
       })
   },

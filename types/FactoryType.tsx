@@ -6,6 +6,8 @@ export type AIFactoryType = {
   error: boolean
   location: [number, number]
   code: string
+  elecbg?:string
+  factoryCode: string;
 }
 export type AIXFactoryType = {
   id: number
@@ -14,6 +16,7 @@ export type AIXFactoryType = {
   error: boolean
   location: [number, number]
   code: string
+  factoryCode: string;
 }
 
 export type BigFactoryType = {

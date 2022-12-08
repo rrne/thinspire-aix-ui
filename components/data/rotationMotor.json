@@ -1,0 +1,118 @@
+{
+    "igs":[
+      {
+        "title": "Air Comp",
+        "type": "aircomp",
+        "value": {
+          "elec": 380,
+          "motor": 37
+        }
+      }
+    ],
+    "icd":[
+      {
+        "title": "Air Comp",
+        "type": "aircomp",
+        "value": {
+          "elec": 380,
+          "motor": 37
+        }
+      },
+      {
+        "title": "Blower01",
+        "type": "blower",
+        "value": {
+          "elec": 380,
+          "motor": 11
+        }
+      },
+      {
+        "title": "Blower02",
+        "type": "blower",
+        "value": {
+          "elec": 380,
+          "motor": 11
+        }
+      },
+      {
+        "title": "Blower03",
+        "type": "blower",
+        "value": {
+          "elec": 380,
+          "motor": 18.5
+        }
+      },
+      {
+        "title": "Blower04",
+        "type": "blower",
+        "value": {
+          "elec": 380,
+          "motor": 18.5
+        }
+      }
+    ],
+    "drt":[
+      {
+        "title": "Air Comp",
+        "type": "aircomp",
+        "value": {
+          "elec": 380,
+          "motor": 11
+        }
+      }
+    ],
+    "dhg":[
+      {
+        "title": "Air Comp01",
+        "type": "aircomp",
+        "value": {
+          "elec": 380,
+          "motor": 75
+        }
+      },
+      {
+        "title": "Air Comp02",
+        "type": "aircomp",
+        "value": {
+          "elec": 380,
+          "motor": 75
+        }
+      }
+    ],
+    "jw":[
+      {
+        "title": "Pump",
+        "type": "pump",
+        "value": {
+          "elec": 380,
+          "motor": 15
+        }
+      },
+      {
+        "title": "Blower",
+        "type": "blower",
+        "value": {
+          "elec": 380,
+          "motor": 30
+        }
+      }
+    ],
+    "sfc":[
+      {
+        "title": "Air Comp",
+        "type": "aircomp",
+        "value": {
+          "elec": 380,
+          "motor": 37
+        }
+      },
+      {
+        "title": "냉각수 Pump",
+        "type": "pump",
+        "value": {
+          "elec": 380,
+          "motor": 37
+        }
+      }
+    ]
+}

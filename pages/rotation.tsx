@@ -10,8 +10,9 @@ const RotaionPage: NextPage = () => {
 
   useEffect(() => {
     store.changeSubpage('rotation')
-    const factoryNum = sessionStorage.getItem('factory')
-    rotation.getRotationMotorAPI()
+    const factory = sessionStorage.getItem('code')
+    rotation.getRotationMotorAPI(factory);
+    rotation.getRotationTotalAPI({site:factory, func:"avg"});
   }, [])
   return (
     <Layout title="Rotation" mainpage={false}>

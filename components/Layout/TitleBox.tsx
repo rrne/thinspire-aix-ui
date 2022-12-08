@@ -6,8 +6,8 @@ const TitleBox = ({ title }): JSX.Element => {
       <div className="title">
         <Image
           src={require('public/images/titleIcon.png')}
-          width={18}
-          height={17}
+          width={20}
+          height={20}
           alt=""
           className="titleIcon"
         />
@@ -22,6 +22,7 @@ const TitleBox = ({ title }): JSX.Element => {
             font-size: 14px;
             display: flex;
             gap: 4px;
+            align-items:center;
           }
         `}
       </style>

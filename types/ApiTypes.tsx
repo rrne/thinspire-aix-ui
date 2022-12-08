@@ -36,14 +36,15 @@ export type AINews = {
 }
 
 //ElecPage API Types
-export type UseageType = [
-  {
+export type UseageType = {
+  site:string
+  items:{
     now_kwh: string
     now_cost: string
     future_kwh: string
     future_cost: string
   }
-]
+}
 export type ElecUsageStatus =
   {
     devId: string
@@ -105,6 +106,38 @@ export type RotationMotor = {
   }
   daysTrend: []
   monthTrend: []
+}
+
+export type RotationChartData = {
+  devnm: string;
+  now_motor_usage: string;
+  daily_motor_elec:{
+    yesterday:ChartDataType[];
+    today:ChartDataType[]
+  }
+  month_motor_usage:string;
+  monthly_motor_elec:{
+    last_month :ChartDataType[];
+    this_month :ChartDataType[];
+  }
+}
+
+export type RotationTotalData = {
+  now_motor_usage: string;
+  daily_motor_elec:{
+    yesterday:ChartDataType[];
+    today:ChartDataType[]
+  }
+  month_motor_usage:string;
+  monthly_motor_elec:{
+    last_month :ChartDataType[];
+    this_month :ChartDataType[];
+  }
+}
+
+type ChartDataType = {
+  tiem:number
+  elec:number
 }
 
 //SteamPage API Types

@@ -24,6 +24,7 @@ const Factory = observable<FactoryStore>({
       error: true,
       location: [126.8583204, 35.2257176],
       code: 'G',
+      factoryCode:"igs"
     },
     {
       id: 2005007002,
@@ -33,6 +34,7 @@ const Factory = observable<FactoryStore>({
       error: true,
       location: [126.857933, 35.2265856],
       code: 'G',
+      factoryCode:"icd"
     },
     {
       id: 2005007003,
@@ -42,6 +44,7 @@ const Factory = observable<FactoryStore>({
       error: true,
       location: [126.863897, 35.2030358],
       code: 'G',
+      factoryCode:"drt"
     },
     {
       id: 2005007004,
@@ -51,6 +54,7 @@ const Factory = observable<FactoryStore>({
       error: true,
       location: [126.8611434, 35.1989575],
       code: 'G',
+      factoryCode:"dhg"
     },
     {
       id: 2005007005,
@@ -60,6 +64,8 @@ const Factory = observable<FactoryStore>({
       error: true,
       location: [127.6584653, 34.8237514],
       code: 'Y',
+      elecbg: "jawon",
+      factoryCode:"jw"
     },
     {
       id: 2005007006,
@@ -69,6 +75,8 @@ const Factory = observable<FactoryStore>({
       error: true,
       location: [127.6492842, 34.8318756],
       code: 'Y',
+      elecbg: "sfc",
+      factoryCode:"sfc"
     },
   ],
   AIFactorysBig: [
@@ -93,6 +101,7 @@ const Factory = observable<FactoryStore>({
       error: true,
       location: [127.2633319, 36.9769888],
       code: 'G',
+      factoryCode:"igs"
     },
     {
       id: 2005007002,
@@ -101,6 +110,7 @@ const Factory = observable<FactoryStore>({
       error: true,
       location: [128.6281658, 36.7908539],
       code: 'G',
+      factoryCode:"igs"
     },
   ],
   apiCallCount: 0,

@@ -52,16 +52,19 @@ const RightPannelComp = observer(
       },
     ]
 
-    const goToControlPage = ({ page, value }) => {
+    const goToControlPage = ({ page, value, code }) => {
       if (page === 'elec') {
         router.push('elec')
         sessionStorage.setItem('factory', value)
+        sessionStorage.setItem('code', code)
       } else if (page === 'steam') {
         router.push('steam')
         sessionStorage.setItem('factory', value)
+        sessionStorage.setItem('code', code)
       } else {
         router.push('rotation')
         sessionStorage.setItem('factory', value)
+        sessionStorage.setItem('code', code)
       }
     }
 
@@ -81,14 +84,6 @@ const RightPannelComp = observer(
               />
               <div>에너지 효율 현황</div>
             </div>
-            {store.module === 'AIX' ? (
-              ''
-            ) : (
-              <div className="factoryLabel" onClick={funcTotal}>
-                <FontAwesomeIcon icon={faHouse} />
-                전체보기
-              </div>
-            )}
           </div>
           <div className="content">
             {store.module === 'AI'
@@ -130,6 +125,7 @@ const RightPannelComp = observer(
                                   goToControlPage({
                                     page: 'elec',
                                     value: factory.id,
+                                    code: factory.factoryCode
                                   })
                                 }
                               >
@@ -154,6 +150,7 @@ const RightPannelComp = observer(
                                   goToControlPage({
                                     page: 'rotation',
                                     value: factory.id,
+                                    code: factory.factoryCode
                                   })
                                 }
                               >
@@ -201,6 +198,7 @@ const RightPannelComp = observer(
                               goToControlPage({
                                 page: 'steam',
                                 value: factory.id,
+                                code: factory.factoryCode
                               })
                             }
                           >

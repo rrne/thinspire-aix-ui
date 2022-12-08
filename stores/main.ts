@@ -41,7 +41,7 @@ const Main = observable<MainStore>({
   AINews: [],
   async getNewsAPI() {
     await axios
-      .get('/search/news', { params: { query: 'AIX' } })
+      .get('/search/news', { params: { query: ['광주첨단','여수산단'], sort:"sim" } })
       .then((res) => {
         runInAction(() => {
           this.newsData = res.data.items
@@ -53,7 +53,9 @@ const Main = observable<MainStore>({
       .get(`http://175.123.142.155:58888/main/daily-usage/${region}`)
       .then((res) => {
         runInAction(() => {
-         region === "gj" ?  this.gjDailyUsage = res.data.data :  this.ysDailyUsage = res.data.data
+          console.log(res.data);
+          
+         region === "gj" ?  this.gjDailyUsage = res.data.data.items :  this.ysDailyUsage = res.data.data.items
         })
       })
   },
@@ -62,7 +64,7 @@ const Main = observable<MainStore>({
       .get(`http://175.123.142.155:58888/main/monthly-usage/${region}`)
       .then((res) => {
         runInAction(() => {
-          region === "gj" ?  this.gjMonthlyUsage = res.data.data :  this.ysMonthlyUsage = res.data.data
+          region === "gj" ?  this.gjMonthlyUsage = res.data.data.items :  this.ysMonthlyUsage = res.data.data.items
         })
       })
   },
