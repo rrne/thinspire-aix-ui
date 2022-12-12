@@ -43,51 +43,42 @@ const RotaionBoard = observer((): JSX.Element => {
         alt=""
         className="subpageBG"
       />
-      <div className="rotations-box">
-         <div className="motor-box total">
-              <div className="motorImgBox">
-               <div className="total-img">
-                <FontAwesomeIcon icon={faT}/></div>
-                <div className="title">TOTAL</div>
-                
-              </div>
-              <div className="value-box">
-                <div
-                  className="value elec"
-                >
-                  <div className="text">
-                    <div className="label">전력량:</div>
-                    {motor?.map(list => list.value.elec).reduce((a,b) => a + b, 0)}
-                    <div className="unit">kWh</div>
-                  </div>
-                </div>
-                <div
-                  className="value temp"
-                >
-                  <div className="text">
-                    <div className="label">모터용량:</div>
-                    {motor?.map(list => list.value.motor).reduce((a,b) => a + b, 0)}
-                    <div className="unit">kW</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chart-box">
-                <div className="charts">
-                  <TitleBox title="1일 Trend" />
-                  <div className="chart-comp">
-                    <TotalGaugeChart keyNm="now_motor_usage" percent={motor?.map(list => list.value.elec).reduce((a,b) => a + b, 0)}/>
-                    <TotalLineChart keyNm="daily_motor_elec" />
-                  </div>
-                </div>
-                <div className="charts">
-                  <TitleBox title="1달 Trend" />
-                  <div className="chart-comp">
-                    <TotalGaugeChart keyNm="month_motor_usage" percent={motor?.map(list => list.value.motor).reduce((a,b) => a + b, 0)}/>
-                    <TotalLineChart keyNm="monthly_motor_elec" />
-                  </div>
-                </div>
+      <div className="motor-box total">
+          <div className="motorImgBox">
+            <div className="total-img">
+            <FontAwesomeIcon icon={faT}/></div>
+            <div className="title">TOTAL</div>
+            
+          </div>
+          <div className="value-box">
+            <div
+              className="value temp"
+            >
+              <div className="text">
+                <div className="label">모터용량:</div>
+                {motor?.map(list => list.value.motor).reduce((a,b) => a + b, 0)}
+                <div className="unit">kW</div>
               </div>
             </div>
+          </div>
+          <div className="chart-box">
+            <div className="charts">
+              <TitleBox title="1일 Trend" />
+              <div className="chart-comp">
+                <TotalGaugeChart keyNm="now_motor_usage" percent={motor?.map(list => list.value.motor).reduce((a,b) => a + b, 0)}/>
+                <TotalLineChart keyNm="daily_motor_elec" />
+              </div>
+            </div>
+            <div className="charts">
+              <TitleBox title="1달 Trend" />
+              <div className="chart-comp">
+                <TotalGaugeChart keyNm="month_motor_usage" percent={motor?.map(list => list.value.motor).reduce((a,b) => a + b, 0)}/>
+                <TotalLineChart keyNm="monthly_motor_elec" />
+              </div>
+            </div>
+          </div>
+        </div>
+      <div className="rotations-box">
         {motor && motor.map((list, i) => {
           return (
             <div className="motor-box" key={i}>
@@ -105,16 +96,6 @@ const RotaionBoard = observer((): JSX.Element => {
                 <div className="title">{list.title}</div>
               </div>
               <div className="value-box">
-                <div
-                  className="value elec"
-                  onClick={() => showModal({ title: '전력', list: list })}
-                >
-                  <div className="text">
-                    <div className="label">전력량:</div>
-                    {list.value.elec.toLocaleString()}
-                    <div className="unit">kWh</div>
-                  </div>
-                </div>
                 <div
                   className="value temp"
                   onClick={() => showModal({ title: '온도', list: list })}

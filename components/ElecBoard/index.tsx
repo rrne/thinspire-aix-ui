@@ -35,7 +35,7 @@ const ElecBoard = ({fac}): JSX.Element => {
         <div className="four-usagecomp" onClick={showModal}>
           <FourUsageComp />
         </div>
-        <DevicePosition factoryNum={fac} />
+        <DevicePosition />
       </div>
       <div className="data-box">
         <div className="smallChart-boxes">

@@ -14,6 +14,21 @@ const GaugeChart = observer(({motorNm, keyNm , percent} : {motorNm:string; keyNm
     if (!data) return;
    
     const options = {
+      tooltip:{
+        trigger:"item",
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        borderWidth: 1,
+        borderColor: 'rgba(25,163,223, 0.5)',
+        textStyle: {
+          color: '#fff',
+        },
+        show:true,
+        formatter: () => `
+          <div style="font-size:16px; font-weight:600">
+          ${(percent / Number(data[keyNm]) * 1000).toFixed(0)}<span style="margin-left:2px; font-size:12px; font-weight:400; color: #cadddf">km/h</span>
+          </div>
+        `
+      },
       series:[
         {
           type: 'gauge',
@@ -80,8 +95,9 @@ const GaugeChart = observer(({motorNm, keyNm , percent} : {motorNm:string; keyNm
             borderRadius: 8,
             offsetCenter: [0, '50%'],
             valueAnimation: true,
+            
             formatter: function (value) {
-              return '{value|' + value.toFixed(0) + '}{unit|km/h}';
+              return '{value|' + ((value / percent) * 100).toFixed(0) + '}{unit|%}';
             },
             rich: {
               value: {

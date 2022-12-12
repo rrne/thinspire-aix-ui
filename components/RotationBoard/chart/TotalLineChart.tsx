@@ -9,14 +9,15 @@ const MonthlyPredictChart = observer(({keyNm} : { keyNm:string;}) => {
 
   useEffect(() => {
     const data = store.rotationChartData?.items[0][keyNm]
-    console.log(data);
     
     if (!data) return;
     const time = []
     const real_value = []
     const real_value2 = []
-    const subkey = keyNm === "daily_motor_elec" ? "yesterday" : "last_month"
-    const subkey2 = keyNm === "daily_motor_elec" ? "today" : "this_month";
+
+   
+    const subkey = keyNm === "daily_motor_elec" ? "today" : "this_month";
+    const subkey2 = keyNm === "daily_motor_elec" ? "yesterday" : "last_month"
 
     for (let i = 0; i < data[subkey].length; i++) {
       time.push(moment(data[subkey][i]?.time * 1000).format('MM/DD'))
@@ -187,7 +188,7 @@ const MonthlyPredictChart = observer(({keyNm} : { keyNm:string;}) => {
           },
         },
         {
-          name: keyNm === "monthly_motor_elec" ? 'today' : "this_month",
+          name: keyNm === "daily_motor_elec" ? 'today' : "this_month",
           type: 'line',
           data: real_value2,
           symbol: 'circle',

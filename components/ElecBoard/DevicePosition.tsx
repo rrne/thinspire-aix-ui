@@ -1,55 +1,88 @@
-import TitleBox from 'components/Layout/TitleBox'
 import useStore from 'stores'
 import { observer } from 'mobx-react-lite';
-import { Progress, Tabs } from 'antd';
+import { Modal, Tabs, Table } from 'antd';
+import type { ColumnsType, TableProps } from 'antd/es/table';
 import { useEffect, useState } from 'react'
-import {
-  ElecUsageStatus
-} from 'types/ApiTypes';
-import {faArrowDown} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const { TabPane } = Tabs;
-import Image from 'next/image';
+import DeviceModalComp from './DeviceModalComp'
 
-const DevicePosition = observer(({factoryNum}:{factoryNum:number}): JSX.Element => {
+export interface DataType {
+  key: React.Key;
+  device_name: string;
+  now_usage_elec: number;
+  today_usage_elec: number;
+  yesterday_usage_elec: number;
+}
+
+const DevicePosition = observer((): JSX.Element => {
 
   const elec = useStore().Elec;
-  const factory = useStore().Factory;
-
-  const [selectFactory,setSelectFactory] = useState(null);
-
-  useEffect(() => {
-    const fac = factory.AIBoutureFactorys.filter(list => list.id === Number(factoryNum))
-    setSelectFactory(fac[0]);
-  },[factoryNum])
-
-  const [elecUsageStatus, setElecUsageStatus] = useState<ElecUsageStatus[]>([])
-  const [arrow, setArrow] = useState("down")
+  const [table,setTable] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
+  const [modalData, setModalData] = useState<DataType>()
 
   useEffect(() => {
-    if(elec.elecUsageStatus.length === 0) return;
-    listArray(elec.elecUsageStatus)
-  },[elec.elecUsageStatus, arrow])
-
-  const listArray = (array) => {
-    if(arrow === "up"){
-      let data = [...array];
-      data.sort((a,b) => a.percent - b.percent);
-      setElecUsageStatus(data)
-    }else{
-      let data = [...array];
-      data.sort((a,b) => b.percent - a.percent);
-      setElecUsageStatus(data)
+    if(!elec.deviceUsageStatus) return;
+    const data = [...elec.deviceUsageStatus.items];
+    for(let i = 0; i < data.length; i++){
+      data[i]["key"] = i
     }
-  }
-  const handleArray = () => {
-    arrow === "up" ?  setArrow("down") :  setArrow("up")
-  }
+    setTable(data)
+
+  },[elec.deviceUsageStatus])
 
   const onChange = (key: string) => {
     console.log(key);
   };
 
+  const tableOnChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
+    console.log('params', pagination, filters, sorter, extra);
+  };
+
+  const showNowElecMoal = (record) => {
+    console.log(record);
+    setModalData(record);
+    setIsModalVisible(true)
+  }
+  
+  const columns: ColumnsType<DataType> = [
+    {
+      title: '설비명',
+      dataIndex: 'device_name',
+      width:400
+    },
+    {
+      title: '현재 사용전력',
+      dataIndex: 'now_usage_elec',
+      sorter: {
+        compare: (a, b) => a.now_usage_elec - b.now_usage_elec,
+        multiple: 3,
+      },
+      render:(text, record) => <div className='data today' onClick={() => showNowElecMoal(record)}>{text} <span className="unit">kWh</span></div>
+    },
+    {
+      title: '금일 평균 사용전력',
+      dataIndex: 'today_usage_elec',
+      sorter: {
+        compare: (a, b) => a.today_usage_elec - b.today_usage_elec,
+        multiple: 2,
+      },
+      render:(text) => <div className='data'>{text} <span className="unit">kWh</span></div>
+    },
+    {
+      title: '전일 평균 사용전력',
+      dataIndex: 'yesterday_usage_elec',
+      sorter: {
+        compare: (a, b) => a.yesterday_usage_elec - b.yesterday_usage_elec,
+        multiple: 1,
+      },
+      render:(text) => <div className='data'>{text} <span className="unit">kWh</span></div>
+    },
+  ];
+  
 
   return (
     <div className="device-position">
@@ -60,31 +93,15 @@ const DevicePosition = observer(({factoryNum}:{factoryNum:number}): JSX.Element 
         <TabPane tab="전력 사용 현황" key="1">
         <div className="table-box">
         <div className="table">
-          <div className='thead'>
-            <div className="th name">설비명</div>
-            <div className="th wh">설비전력</div>
-            <div className="th percent">사용전력 <FontAwesomeIcon icon={faArrowDown} className={arrow === "up" ? "arrow up" : "arrow down"} onClick={handleArray}/></div>
-          </div>
-          <div className='tbody'>
-            {elecUsageStatus.map((list,i) => {
-              return(
-                <div className="tr" key={i}>
-                  <div className="td name">{list.pointName}</div>
-                  <div className="td wh">{list.maximum_wh} <span className="unit">Wh</span></div>
-                  <div className="td percent"><Progress percent={Number((list.percent * 100).toFixed(0))} strokeColor={{ '0%': '#0954b6','100%': '#179eff',}} format={percent => `${percent} %`} /></div>
-                </div>
-              )
-            })}
-          </div>
+        <Table columns={columns} dataSource={table} onChange={tableOnChange} pagination={false} scroll={{ y: "100%"}} showSorterTooltip={false}/>
         </div>
       </div>
         </TabPane>
-        {selectFactory && selectFactory.elecbg ? <TabPane tab="공장 도면" key="2">
+        {/* {selectFactory && selectFactory.elecbg ? <TabPane tab="공장 도면" key="2">
             <div className="img-box">
               <Image src={`/images/${selectFactory.elecbg}.png`} layout="fill" />
               </div>
-        </TabPane> : ""}
-       
+        </TabPane> : ""} */}
       </Tabs>
       {/* <img
         src={require('public/images/elec_deviceposition.png')}
@@ -98,6 +115,14 @@ const DevicePosition = observer(({factoryNum}:{factoryNum:number}): JSX.Element 
         alt=""
         className="positionBg"
       /> */}
+      <Modal
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+        wrapClassName="chartModal"
+      >
+        <DeviceModalComp data={modalData} />
+      </Modal>
     </div>
   )
 })

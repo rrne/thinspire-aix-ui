@@ -62,6 +62,22 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      .data{
+        &.today{
+          height: 100%;
+          cursor: pointer;
+          transition: 0.2s;
+          color: white;
+          &:hover{
+            color: #40ace9;
+          }
+        }
+        .unit{
+          color: #9ba7ad;
+          font-size: 12px;
+          margin-left: 4px;
+        }
+      }
 
       .ant-tabs-nav{
         box-sizing: border-box;

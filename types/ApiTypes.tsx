@@ -45,14 +45,12 @@ export type UseageType = {
     future_cost: string
   }
 }
-export type ElecUsageStatus =
+export type DeviceUsageStatus =
   {
-    devId: string
-    femsTime: string
-    maximum_wh: number
-    percent: number
-    pointName: string
-    total_wh: number
+    device_name: string
+    now_usage_elec: number
+    today_usage_elec: number
+    yesterday_usage_elec: number
   }
 
 export type DailyPredict = {

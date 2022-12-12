@@ -5,7 +5,7 @@ import {
   DignosticPlan,
   CsvData,
   PPgraphData,
-  ElecUsageStatus
+  DeviceUsageStatus
 } from 'types/ApiTypes'
 import { runInAction, observable } from 'mobx'
 import axios from 'axios'
@@ -16,7 +16,10 @@ interface ElecStore {
     site:string;
     items:DailyPredict[]
   }
-  elecUsageStatus: ElecUsageStatus[]
+  deviceUsageStatus: {
+    site:string;
+    items:DeviceUsageStatus[]
+  }
   monthlyPredict: {
     site:string;
     items:MonthlyPredict[]
@@ -26,7 +29,7 @@ interface ElecStore {
   ppgraphData: PPgraphData
   downloadPPTrendData: string[]
   getUsageChargeAPI: (factoryCode: string) => void
-  getElecUsageStatusAPI: (id: string) => void
+  getDeviceUsageStatusAPI: (factoryCode: string) => void
   getDailyPredictAPI: (factoryCode: string) => void
   getMonthlyPredictAPI: (factoryCode: string) => void
   getDignosticPlanAPI: (id: string) => void
@@ -38,7 +41,7 @@ interface ElecStore {
 const Elec = observable<ElecStore>({
   useageCharge: null,
   dailyPredict: null,
-  elecUsageStatus:[],
+  deviceUsageStatus:null,
   monthlyPredict: null,
   dignosticPlan: [],
   csvData: [],
@@ -53,14 +56,12 @@ const Elec = observable<ElecStore>({
         })
       })
   },
-  async getElecUsageStatusAPI(id) {
+  async getDeviceUsageStatusAPI(factoryCode) {
     await axios
-      .post('http://175.123.142.155:28887/sub/elec/power_plant_details', {
-        siteid: id,
-      })
+    .get(`http://175.123.142.155:58888/sub/power/device-usage/${factoryCode}`)
       .then((res) => {
         runInAction(() => {
-          this.elecUsageStatus = res.data;
+          this.deviceUsageStatus = res.data.data;
         })
       })
   },

@@ -4,9 +4,10 @@ import PPTrendChart from './chart/PPTrendChart'
 import useStore from 'stores'
 import { useState, useEffect, useRef } from 'react'
 import { CSVLink } from 'react-csv'
-import { observer } from 'mobx-react-lite'
+import { observer } from 'mobx-react-lite';
+import {DataType} from './DevicePosition'
 
-const ModalComp = observer((): JSX.Element => {
+const DeviceModalComp = observer(({data} : {data:DataType}): JSX.Element => {
   const store = useStore().Elec
   const factory = useStore().Factory
   const csvLink = useRef(null)
@@ -15,14 +16,11 @@ const ModalComp = observer((): JSX.Element => {
   const [period, setPeriod] = useState('today')
   const [csvData, setCsvData] = useState([])
 
-  const id = sessionStorage.getItem('factory')
+  const id = sessionStorage.getItem('code')
 
   useEffect(() => {
-    const thisFactory = factory.AIBoutureFactorys.filter(
-      (list) => JSON.stringify(list.id) === id
-    )[0]
-    setTitle(thisFactory.title)
-  }, [])
+    setTitle(data.device_name)
+  }, [data])
 
   const changeOptions = (value) => {
     setPeriod(value)
@@ -48,7 +46,7 @@ const ModalComp = observer((): JSX.Element => {
   return (
     <div className="modal">
       <div className="top-box">
-        <div className="title">{title} 전력사용량</div>
+        <div className="title">{title} 현재 사용전력</div>
         <div className="selectTime-box">
           <div className="label">조회기간</div>
           <div className="select">
@@ -83,4 +81,4 @@ const ModalComp = observer((): JSX.Element => {
   )
 })
 
-export default ModalComp
+export default DeviceModalComp

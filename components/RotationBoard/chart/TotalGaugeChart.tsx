@@ -81,7 +81,7 @@ const GaugeChart = observer(({keyNm, percent} : {keyNm:string; percent:number}) 
             offsetCenter: [0, '50%'],
             valueAnimation: true,
             formatter: function (value) {
-              return '{value|' + value.toFixed(0) + '}{unit|km/h}';
+              return '{value|' + ((value / percent) * 100).toFixed(0) + '}{unit|%}';
             },
             rich: {
               value: {

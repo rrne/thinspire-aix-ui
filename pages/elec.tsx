@@ -17,7 +17,7 @@ const ElecPage: NextPage = () => {
     store.changeSubpage('elec')
 
     elec.getUsageChargeAPI(factory)
-    elec.getElecUsageStatusAPI(factoryNumber)
+    elec.getDeviceUsageStatusAPI(factory)
     elec.getDailyPredictAPI(factory)
     elec.getMonthlyPredictAPI(factory)
     elec.getDignosticPlanAPI(factoryNumber)

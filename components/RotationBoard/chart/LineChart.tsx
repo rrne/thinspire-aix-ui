@@ -13,8 +13,10 @@ const MonthlyPredictChart = observer(({motorNm, keyNm} : {motorNm:string; keyNm:
     const time = []
     const real_value = []
     const real_value2 = []
-    const subkey = keyNm === "daily_motor_elec" ? "yesterday" : "last_month"
-    const subkey2 = keyNm === "daily_motor_elec" ? "today" : "this_month";
+
+    const subkey = keyNm === "daily_motor_elec" ? "today" : "this_month";
+    const subkey2 = keyNm === "daily_motor_elec" ? "yesterday" : "last_month"
+  
 
     for (let i = 0; i < data[keyNm][subkey].length; i++) {
       time.push(moment(data[keyNm][subkey][i]?.time * 1000).format('MM/DD'))
@@ -185,7 +187,7 @@ const MonthlyPredictChart = observer(({motorNm, keyNm} : {motorNm:string; keyNm:
           },
         },
         {
-          name: keyNm === "monthly_motor_elec" ? 'today' : "this_month",
+          name: keyNm === "daily_motor_elec" ? 'today' : "this_month",
           type: 'line',
           data: real_value2,
           symbol: 'circle',
